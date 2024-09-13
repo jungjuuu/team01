@@ -14,11 +14,12 @@ public class MainController {
 		return "main";
 	}
 	
+
 	//login : 인터셉트
 	@RequestMapping("/sellerlogin.do")
 	public String login(String accountId, String accountPassword, HttpSession session) {
 		String page="login_form.do";
-		if(accountId.equals(accountId) && accountPassword.equals(accountPassword)) {
+		if(accountId.equals(accountPassword)) {
 			session.setAttribute("accountId", accountId);
 			session.setAttribute("userPassword", accountPassword);
 			
@@ -33,6 +34,7 @@ public class MainController {
 		session.setAttribute("accountId",null);
 	return "redirect:/sellerlogin.do";
 	}
+
 }
 
 
