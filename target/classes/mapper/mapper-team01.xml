@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-team01">
+
+	<insert id="" parameterType=""> <!-- id : dao의 메서드 이름과 같음 -->		
+	</insert>
+	
+	<select id="" resultType="">	<!--  resultType: 받는 값 -->		
+	</select>
+	
+	
+	<delete id="" parameterType="">	
+	</delete>
+	
+	<update id="" parameterType=""> <!-- id는 dao의 메서드 -->
+		<set>
+			<if test=""></if>
+		</set>
+	</update>
+	
+</mapper>
