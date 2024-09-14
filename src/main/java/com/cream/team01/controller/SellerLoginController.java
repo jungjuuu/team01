@@ -30,7 +30,7 @@ public class SellerLoginController {
 
 	@RequestMapping("/sellerlogin.do") 
 	public ModelAndView getForm() {
-		ModelAndView result = new ModelAndView("/sellerlogin");// 페이지로 포워딩
+		ModelAndView result = new ModelAndView("/memberlogin");// 페이지로 포워딩
 		return result;
 	}
 }
