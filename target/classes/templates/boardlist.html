@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous">
+</script>
+  
+<script type="text/javascript">
+	function check(abId) {
+		pwd = prompt('수정/삭제 하려면 비밀번호를 넣으세요');
+		document.location.href = "editForm.do?abId=" + abId + "&upasswd=" + pwd;
+	}
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>주소록:목록화면</title>
+
+</head>
+
+
+<body>
+	<div align="center">
+		<H2>문의 게시판</H2>
+		<form>
+			<a href="form.do">주소록 등록</a>
+			
+			<table border="1">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>문의글 내용</th>
+					<th>문의작성일자</th>
+				</tr>
+			
+					<tr th:each="ab : ${memberlist}">					
+						<td><a th:href="@{/editform.do(abId=${ab.abId})}" th:text="${ab.abId}"></a></td>
+						<td th:text="${ab.abName}"></td>
+						<td th:text="${ab.abEmail}"></td>
+						<td th:text="${ab.abTel}"></td>
+						<td th:text="${ab.abBirth}"></td>
+						<td th:text="${ab.abComdept}"></td>
+						<td th:text="${ab.abMemo}"></td>
+					</tr>
+
+			</table>
+
+		</form>
+		<div>
+			<a href="logout.do">logout</a>
+		</div>
+		<p id="myp"> addrbook content </p>
+		
+	</div>
+	
+	<script>
+		$(function() {
+			$('.myemail').on('click', function(){
+				// alert($(this).html());
+				// email 클릭했는데 id를 가져와서 전달 해야한다. dom 탐색, closest, prev, next
+				let abId = $(this).prev('td').prev('td').text();
+				$.ajax({
+					url: 'addrbook/' + abId,
+					success: function(result) {
+						// myp의 내용을 result로 변경
+						//alert(JSON.stringify(result));
+						$('#myp').html(JSON.stringify(result));
+					}
+					
+				});
+			});
+		});
+		
+	</script>
+	
+</body>
+
+</html>
