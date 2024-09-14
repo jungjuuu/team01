@@ -28,9 +28,9 @@ public class SellerLoginController {
 	 @Autowired SellerDAO dao;
 	 
 
-	@RequestMapping("/sellerlogin.do") 
+	@RequestMapping("/sellerlogin") 
 	public ModelAndView getForm() {
-		ModelAndView result = new ModelAndView("/memberlogin");// 페이지로 포워딩
+		ModelAndView result = new ModelAndView("/boardlist");// 페이지로 포워딩
 		return result;
 	}
 }
