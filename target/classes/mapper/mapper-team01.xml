@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper-team01">
 
+
+
+    <!-- 카테고리 번호에 따른 상품 목록을 조회하는 쿼리 -->
+    <select id="getProductsByCategory" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT product_no, product_name, product_image, product_price, category_no, seller_no
+        FROM products
+        WHERE category_no = #{categoryNo}
+    </select>
+
+
+
 <!-- 	<insert id="" parameterType=""> id : dao의 메서드 이름과 같음		
 	</insert>
 	

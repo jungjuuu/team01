@@ -1,22 +1,27 @@
-<header>
-		<logo class="wrapper"
-			style="margin-bottom: 25px; margin-left: 4ex; font-size: 5ex;">CREAM</logo>
-		<span style="margin-left: 57em;"> <a href="#" id="home"
-			name="home" style="margin-left: 2ex; font-size: 3.5ex; color: white;">HOME</a>
-			<a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">MY PAGE</a> <i
-			class="bi bi-person"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">MY LIKE</a> <i
-			class="bi bi-heart-fill"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">SHOPPING BAG</a> <i
-			class="bi bi-basket3"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">LOGIN</a> <i
-			class="bi bi-door-open"></i>
-		</span>
-		<div style="margin-top: 1ex;">
-			<span style="margin-left: 11ex">상의</span> <span
-				style="margin-left: 1.5ex">하의</span> <span
-				style="margin-left: 1.5ex">아우터</span> <span
-				style="margin-left: 1.5ex">신발</span>
-		</div>
-	</header>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <header>
+        <logo class="wrapper" style="margin-bottom: 25px; margin-left: 4ex; font-size: 5ex;">CREAM</logo>
+        <span style="margin-left: 57em;">
+            <a href="#" id="home" name="home" style="margin-left: 2ex; font-size: 3.5ex; color: white;">HOME</a>
+            <a href="#" id="mypage" name="mypage" style="margin-left: 2ex; color: white;">MY PAGE</a>
+            <i class="bi bi-person"></i>
+            <a href="#" id="like" name="like" style="margin-left: 2ex; color: white;">MY LIKE</a>
+            <i class="bi bi-heart-fill"></i>
+            <a href="#" id="shoppingBag" name="shoppingBag" style="margin-left: 2ex; color: white;">SHOPPING BAG</a>
+            <i class="bi bi-basket3"></i>
+            <a href="#" id="login" name="login" style="margin-left: 2ex; color: white;">LOGIN</a>
+            <i class="bi bi-door-open"></i>
+        </span>
+        <div style="margin-top: 1ex;">
+            <span style="margin-left: 11ex"><a href="/products/category/1">상의</a></span>
+            <span style="margin-left: 1.5ex"><a href="/products/category/2">하의</a></span>
+            <span style="margin-left: 1.5ex"><a href="/products/category/3">아우터</a></span>
+            <span style="margin-left: 1.5ex"><a href="/products/category/4">신발</a></span>
+        </div>
+    </header>
+</body>
+</html>
