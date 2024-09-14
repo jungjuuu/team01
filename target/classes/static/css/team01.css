@@ -5,8 +5,8 @@ table {
 	border-collapse: collapse;
 	text-align: center;
 }
- 
-td,th {
+
+td, th {
 	font-size: 10pt;
 	border: 1px solid #98bf21;
 	height: 30px;
@@ -26,10 +26,43 @@ tr td {
 
 input {
 	height: 25px;
-	width:200px;
+	width: 200px;
 }
 
-input[type="submit"],[type="reset"],[type="button"] {
+input[type="submit"], [type="reset"], [type="button"] {
 	height: 25px;
-	width:80px;
+	width: 80px;
 }
+
+header {
+	background-color: black;
+	padding: 15px;
+	color: white;
+}
+
+logo {
+	color: #fff;
+	font-size: 80px;
+	transform: rotate(10deg) skew(-10deg);
+	-webkit-transform: rotate(10deg) skew(-10deg);
+	-moz-transform: rotate(10deg) skew(-10deg);
+	-o-transform: rotate(10deg) skew(-10deg);
+	-ms-transform: rotate(10deg) skew(-10deg);
+	text-shadow: 1px 1px 0 #7d7c7c, 2px 2px 0 #7d7c7c, 3px 3px 0 #7d7c7c,
+		4px 4px 0 #7d7c7c, 5px 5px 0 #7d7c7c, 6px 6px 0 #7d7c7c, 7px 7px 0
+		#7d7c7c, 8px 8px 0 #555756, 9px 9px 0 #555756, 10px 10px 0 #555756,
+		11px 11px 0 #555756, 12px 12px 0 #555756, 13px 13px 0 #555756, 14px
+		14px 0 #555756;
+}
+
+header a {
+	text-decoration: none;
+	color: white;
+}
+footer {
+            background-color: black;
+            padding: 20px;
+            color: white;
+            font-size: 1.5ex;
+        }
+        
