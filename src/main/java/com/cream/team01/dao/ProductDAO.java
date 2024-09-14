@@ -24,4 +24,19 @@ public class ProductDAO {
     public ProductVO getProductByNo(int productNo) {
         return session.selectOne("getProductByNo", productNo);
     }
+    
+    // 상품 추가
+    public void addProduct(ProductVO product) {
+        session.insert("addProduct", product);
+    }
+
+    // 상품 수정
+    public void updateProduct(ProductVO product) {
+        session.update("updateProduct", product);
+    }
+
+    // 상품 삭제
+    public void deleteProduct(int productNo) {
+        session.delete("deleteProduct", productNo);
+    }
 }

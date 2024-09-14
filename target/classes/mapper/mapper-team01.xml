@@ -14,6 +14,25 @@
     <select id="getProductByNo" resultType="com.cream.team01.vo.ProductVO">
         SELECT * FROM products WHERE product_no = #{productNo}
     </select>
+    
+    <!-- 상품 추가 쿼리 -->
+    <insert id="addProduct" parameterType="com.cream.team01.vo.ProductVO">
+        INSERT INTO products (product_name, product_price, category_no, seller_no, product_image)
+        VALUES (#{productName}, #{productPrice}, #{categoryNo}, #{sellerNo}, #{productImage})
+    </insert>
+    
+    <!-- 상품 수정 -->
+    <update id="updateProduct" parameterType="com.cream.team01.vo.ProductVO">
+        UPDATE products
+        SET product_name = #{productName}, product_price = #{productPrice}, 
+            category_no = #{categoryNo}, product_image = #{productImage}
+        WHERE product_no = #{productNo}
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM products WHERE product_no = #{productNo}
+    </delete>
 
 
 
