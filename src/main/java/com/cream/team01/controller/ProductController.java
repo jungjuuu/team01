@@ -15,19 +15,26 @@ import com.cream.team01.vo.ProductVO;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductDAO productDAO;
+	@Autowired
+	private ProductDAO productDAO;
 
-    // 카테고리별 상품 목록을 보여주는 메서드 (ModelAndView 사용)
-    @RequestMapping("/category/{categoryNo}")
-    public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo) {
-        // DAO를 통해 해당 카테고리의 상품 목록을 가져옴
-        List<ProductVO> products = productDAO.getProductsByCategory(categoryNo);
+	// 카테고리별 상품 목록을 조회
+	@RequestMapping("/category/{categoryNo}")
+	public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo) {
+		List<ProductVO> products = productDAO.getProductsByCategory(categoryNo);
+		ModelAndView mav = new ModelAndView("products"); 
+		mav.addObject("products", products); 
 
-        // ModelAndView 객체 생성 및 데이터 추가
-        ModelAndView mav = new ModelAndView("products"); // products.html 뷰 지정
-        mav.addObject("products", products); // 상품 리스트를 모델에 추가
+		return mav; 
+	}
 
-        return mav; // ModelAndView 반환
-    }
+	// 상품 상세 페이지를 조회
+	@RequestMapping("/detail/{productNo}")
+	public ModelAndView getProductDetail(@PathVariable("productNo") int productNo) {
+		ProductVO product = productDAO.getProductByNo(productNo);
+		ModelAndView mav = new ModelAndView("productDetail"); 
+		mav.addObject("product", product); 
+
+		return mav; 
+	}
 }

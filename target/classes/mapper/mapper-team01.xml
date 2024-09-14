@@ -10,6 +10,10 @@
         FROM products
         WHERE category_no = #{categoryNo}
     </select>
+    
+    <select id="getProductByNo" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * FROM products WHERE product_no = #{productNo}
+    </select>
 
 
 
