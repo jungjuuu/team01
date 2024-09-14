@@ -112,29 +112,7 @@ a {
 </style>
 </head>
 <body>
-	<header>
-		<logo class="wrapper"
-			style="margin-bottom: 25px; margin-left: 4ex; font-size: 5ex;">CREAM</logo>
-		<span style="margin-left: 57em;"> <a href="#" id="home"
-			name="home" style="margin-left: 2ex; font-size: 3.5ex; color: white;">HOME</a>
-			<a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">MY PAGE</a> <i
-			class="bi bi-person"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">MY LIKE</a> <i
-			class="bi bi-heart-fill"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">SHOPPING BAG</a> <i
-			class="bi bi-basket3"></i> <a href="#" id="home" name="home"
-			style="margin-left: 2ex; color: white;">LOGIN</a> <i
-			class="bi bi-door-open"></i>
-		</span>
-		<div style="margin-top: 1ex;">
-			<span style="margin-left: 11ex">상의</span> <span
-				style="margin-left: 1.5ex">하의</span> <span
-				style="margin-left: 1.5ex">아우터</span> <span
-				style="margin-left: 1.5ex">신발</span>
-		</div>
-	</header>
-
+<div th:insert="header :: header"></div>
 	<div class="slider__wrap">
 		<div class="slider__img">
 			<div class="slider__inner">
@@ -304,12 +282,7 @@ a {
 	</div>
 
 </body>
-<footer>
-	<p>고객센터 1400-1400</p>
-	<p>운영시간 : 평일 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</p>
-	<button type="button" class="btn btn-secondary btn-sm">FAQ</button>
-	<button type="button" class="btn btn-secondary btn-sm">1:1문의</button>
-</footer>
+ <div th:insert="footer :: footer"></div>
 
 <script>
 	//이미지 슬라이드
