@@ -32,6 +32,11 @@ public class AccountLoginController {
 
 	        // 로그인 결과 메시지를 위한 변수
 	        String loginMessage;
+	        
+	        // 로그 출력 (디버깅 용도)
+	        System.out.println("입력된 accountId: " + accountId);
+	        System.out.println("입력된 accountPassword: " + accountPassword);
+	        System.out.println("조회된 account: " + account);
 
 	        // 입력된 비밀번호와 DB의 비밀번호가 일치하는지 확인
 	        if (account != null && account.getAccountPassword().equals(accountPassword)) {

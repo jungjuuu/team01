@@ -14,7 +14,7 @@ public class AccountDAO {
 
 	public AccountVO selectAccount(String accountId) {
 		
-		return null;
+		  return session.selectOne("selectAccount", accountId);
 	}
 	
 	
