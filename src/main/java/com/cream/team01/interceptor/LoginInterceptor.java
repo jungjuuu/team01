@@ -16,9 +16,9 @@ public class LoginInterceptor implements HandlerInterceptor {
            throws Exception {
        System.out.println("LoginInterceptor.preHandler()");
        HttpSession session = request.getSession();
-       String userId = (String) session.getAttribute("userId");
-       if(userId == null || userId.length() == 0) {
-           response.sendRedirect("login_form.do");
+       String sellerId = (String) session.getAttribute("sellerId");
+       if(sellerId == null || sellerId.length() == 0) {
+           response.sendRedirect("sellerlogin.do");
            return false;
        }
        return true;

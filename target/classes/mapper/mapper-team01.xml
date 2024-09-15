@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="mapper-team01">
-<!-- 
-	<insert id="" parameterType=""> id : dao의 메서드 이름과 같음		
-	</insert>
+
+<!-- ID로 회원 정보 조회 -->
+<select id="selectAccount" parameterType="String" resultType="com.edu.myboot.vo.AccountVO">
+    SELECT * FROM accounts WHERE account_id = #{accountId}
+</select>
 	
-	<select id="" resultType="">	 resultType: 받는 값		
-	</select>
-	
-	
-	<delete id="" parameterType="">	
-	</delete>
-	
-	<update id="" parameterType=""> id는 dao의 메서드
-		<set>
-			<if test=""></if>
-		</set>
-	</update> -->
-	
+<!-- <select id="findId" parameterType="com.edu.myboot.vo.AccountVO" resultType="com.edu.myboot.vo.memberVO">
+    SELECT a.account_id
+	FROM accounts a
+	JOIN members m ON m.account_no = a.account_no
+	WHERE m.member_name = #{memberName}
+	AND m.member_mobile =#{memberMobile}
+</select>
+	 -->
 </mapper>

@@ -37,6 +37,10 @@ public class SellerVO {
 		return "SellerVO [sellerNo=" + sellerNo + ", brand=" + brand + ", sellerMobile=" + sellerMobile + ", accountNo="
 				+ accountNo + "]";
 	}
+	public Object getAccountPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
