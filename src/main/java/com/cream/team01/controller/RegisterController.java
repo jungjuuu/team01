@@ -1,9 +1,16 @@
 package com.cream.team01.controller;
 
-public class RegisterController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-	public static void main(String[] args) {
-
-	}
-
-}
+/*
+ * @Controller public class RegisterController {
+ * 
+ * @RequestMapping("/sellerregister") ModelAndView result = new
+ * ModelAndView("/sellerregister");// 페이지로 포워딩 return result;
+ * 
+ * }
+ * 
+ * 
+ */
