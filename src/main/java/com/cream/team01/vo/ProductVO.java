@@ -9,6 +9,14 @@ public class ProductVO {
 	public int sellerNo;
 	public String productImage;
 	
+	public CategoryVO category;
+	
+	public CategoryVO getCategory() {
+		return category;
+	}
+	public void setCategory(CategoryVO category) {
+		this.category = category;
+	}
 	public String getProductImage() {
 		return productImage;
 	}

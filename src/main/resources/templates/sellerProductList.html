@@ -24,10 +24,10 @@
                 <td th:text="${product.productNo}"></td>
                 <td th:text="${product.productName}"></td>
                 <td th:text="${product.productPrice} + ' 원'"></td>
-                <td th:text="${product.categoryNo}"></td>
+                <td th:text="${product.category.categoryName}"></td>
                 <td><img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" width="100"></td>
-                <td><a th:href="@{'/seller/product/edit/' + ${product.productNo}}">수정</a></td>
-                <td><a th:href="@{'/seller/product/delete/' + ${product.productNo}}">삭제</a></td>
+                <td><a th:href="@{'/seller/products/edit/' + ${product.productNo}}">수정</a></td>
+                <td><a th:href="@{'/seller/products/delete/' + ${product.productNo}}">삭제</a></td>
             </tr>
         </tbody>
     </table>

@@ -42,11 +42,10 @@
 
 	<main id="container" class="product-item flex-grow-1"
 		style="background-color: white; padding: 50px;">
-		<div style="font-size: 3ex; font-weight: 600;">일단 메인 보면 카테고리
+		<div style="font-size: 3ex; font-weight: 600;" th:text="${category.categoryEnglishName}">일단 메인 보면 카테고리
 			영여명칭이 필요??</div>
-		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">
+		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;" th:text="${category.categoryName}">
 			일단 메인 보면 카테고리 한글명칭이 필요??
-			</p>
 		</div>
 
 

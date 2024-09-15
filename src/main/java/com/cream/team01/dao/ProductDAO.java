@@ -43,4 +43,6 @@ public class ProductDAO {
 	public void deleteProduct(int productNo) {
 		session.delete("deleteProduct", productNo);
 	}
+	
+
 }

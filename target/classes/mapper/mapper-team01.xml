@@ -2,67 +2,110 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper-team01">
 
-	 <!-- 판매자 정보 조회 -->
-    <select id="getSellerByNo" resultType="com.cream.team01.vo.SellerVO">
-        SELECT seller_no, brand_name, seller_mobile 
-        FROM sellers 
-        WHERE seller_no = #{sellerNo}
-    </select>
-    
-    
-
-    <!-- 카테고리 번호에 따른 상품 목록을 조회하는 쿼리 -->
-    <select id="getProductsByCategory" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT product_no, product_name, product_image, product_price, category_no, seller_no
-        FROM products
-        WHERE category_no = #{categoryNo}
-    </select>
-    
-    <select id="getProductByNo" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * FROM products WHERE product_no = #{productNo}
-    </select>
-    
-    <!-- 판매자의 등록된 상품을 가져오는 쿼리 -->
-    <select id="getProductsBySeller" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * FROM products WHERE seller_no = #{sellerNo}
-    </select>
-    
-    
-    <!-- 상품 추가 쿼리 -->
-    <insert id="addProduct" parameterType="com.cream.team01.vo.ProductVO">
-        INSERT INTO products (product_name, product_price, category_no, seller_no, product_image)
-        VALUES (#{productName}, #{productPrice}, #{categoryNo}, #{sellerNo}, #{productImage})
-    </insert>
-    
-    <!-- 상품 수정 -->
-    <update id="updateProduct" parameterType="com.cream.team01.vo.ProductVO">
-        UPDATE products
-        SET product_name = #{productName}, product_price = #{productPrice}, 
-            category_no = #{categoryNo}, product_image = #{productImage}
-        WHERE product_no = #{productNo}
-    </update>
-
-    <!-- 상품 삭제 -->
-    <delete id="deleteProduct" parameterType="int">
-        DELETE FROM products WHERE product_no = #{productNo}
-    </delete>
-
-
-
-<!-- 	<insert id="" parameterType=""> id : dao의 메서드 이름과 같음		
-	</insert>
-	
-	<select id="" resultType="">	 resultType: 받는 값		
+	<!-- 판매자 정보 조회 -->
+	<select id="getSellerByNo"
+		resultType="com.cream.team01.vo.SellerVO">
+		SELECT seller_no, brand_name, seller_mobile
+		FROM sellers
+		WHERE seller_no = #{sellerNo}
 	</select>
-	
-	
-	<delete id="" parameterType="">	
+
+
+
+	<!-- 카테고리 번호에 따른 상품 목록을 조회하는 쿼리 -->
+	<select id="getProductsByCategory" parameterType="int"
+		resultType="com.cream.team01.vo.ProductVO">
+		SELECT product_no, product_name, product_image,
+		product_price, category_no,
+		seller_no
+		FROM products
+		WHERE category_no =
+		#{categoryNo}
+	</select>
+
+	<select id="getProductByNo"
+		resultType="com.cream.team01.vo.ProductVO">
+		SELECT * FROM products WHERE product_no = #{productNo}
+	</select>
+
+	<!-- productWithCategoryResultMap을 정의하여 ProductVO와 CategoryVO를 매핑 -->
+	<resultMap id="productWithCategoryResultMap"
+		type="com.cream.team01.vo.ProductVO">
+		<!-- ProductVO의 필드 매핑 -->
+		<id property="productNo" column="product_no" />
+		<result property="productName" column="product_name" />
+		<result property="productImage" column="product_image" />
+		<result property="productPrice" column="product_price" />
+		<result property="sellerNo" column="seller_no" />
+
+		<!-- CategoryVO와의 연관 관계 설정 -->
+		<association property="category"
+			javaType="com.cream.team01.vo.CategoryVO">
+			<id property="categoryNo" column="category_no" />
+			<result property="categoryName" column="category_name" />
+		</association>
+	</resultMap>
+
+	<!-- 판매자의 등록된 상품을 가져오는 쿼리 -->
+	<select id="getProductsBySeller" parameterType="int"
+		resultMap="productWithCategoryResultMap">
+		SELECT
+		p.product_no,
+		p.product_name,
+		p.product_image,
+		p.product_price,
+		p.seller_no,
+		c.category_no,
+		c.category_name
+		FROM products
+		p
+		JOIN categories c ON p.category_no = c.category_no
+		WHERE p.seller_no =
+		#{sellerNo}
+	</select>
+
+
+
+	<!-- 상품 추가 쿼리 -->
+	<insert id="addProduct"
+		parameterType="com.cream.team01.vo.ProductVO">
+		INSERT INTO products (product_name, product_price,
+		category_no, seller_no,
+		product_image)
+		VALUES (#{productName},
+		#{productPrice}, #{categoryNo}, #{sellerNo},
+		#{productImage})
+	</insert>
+
+	<!-- 상품 수정 -->
+	<update id="updateProduct"
+		parameterType="com.cream.team01.vo.ProductVO">
+		UPDATE products
+		SET product_name = #{productName},
+		product_price = #{productPrice},
+		category_no = #{categoryNo},
+		product_image = #{productImage}
+		WHERE product_no = #{productNo}
+	</update>
+
+	<!-- 상품 삭제 -->
+	<delete id="deleteProduct" parameterType="int">
+		DELETE FROM products
+		WHERE product_no = #{productNo}
 	</delete>
-	
-	<update id="" parameterType=""> id는 dao의 메서드
-		<set>
-			<if test=""></if>
-		</set>
-	</update> -->
-	
+	<!-- 카테고리 이름 받아오는 쿼리 -->
+	<select id="getCategoryNameByNo" parameterType="int"
+		resultType="com.cream.team01.vo.CategoryVO">
+		SELECT category_no, category_name
+		FROM categories
+		WHERE category_no = #{categoryNo}
+	</select>
+
+
+
+	<!-- <insert id="" parameterType=""> id : dao의 메서드 이름과 같음 </insert> <select 
+		id="" resultType=""> resultType: 받는 값 </select> <delete id="" parameterType=""> 
+		</delete> <update id="" parameterType=""> id는 dao의 메서드 <set> <if test=""></if> 
+		</set> </update> -->
+
 </mapper>

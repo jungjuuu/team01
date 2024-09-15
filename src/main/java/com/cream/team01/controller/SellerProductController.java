@@ -21,20 +21,20 @@ public class SellerProductController {
 
 	@Autowired
 	private ProductDAO productDAO;
-	
+
 	@Autowired
-    private SellerDAO sellerDAO;
+	private SellerDAO sellerDAO;
 
 	// 판매자의 상품 목록 조회 result
 
 	@RequestMapping("/list")
 	public ModelAndView sellerProductList() {
-		//(@PathVariable("sellerNo") int sellerNo)
+		// (@PathVariable("sellerNo") int sellerNo)
 		// sellerNo이 1이라는 가정 하에 상품 목록 조회
 		int sellerNo = 1;
-		
+
 		SellerVO seller = sellerDAO.getSellerByNo(sellerNo);
-		
+
 		List<ProductVO> products = productDAO.getProductsBySeller(sellerNo);
 
 		ModelAndView result = new ModelAndView("sellerProductList"); // 상품 목록 뷰
@@ -79,7 +79,7 @@ public class SellerProductController {
 	// 상품 삭제 처리
 	@RequestMapping("/delete/{productNo}")
 	public String deleteProduct(@PathVariable("productNo") int productNo) {
-		productDAO.deleteProduct(productNo);
-		return "redirect:/seller/products/list";
+		productDAO.deleteProduct(productNo); // DAO에서 해당 상품 삭제 처리
+		return "redirect:/seller/products/list"; // 삭제 후 상품 목록으로 리다이렉트
 	}
 }
