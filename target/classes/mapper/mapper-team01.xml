@@ -159,6 +159,6 @@
 			WHERE m.member_name = #{memberName}
 			AND m.member_mobile = #{memberMobile}
 		</select>
-
+		
 
 </mapper>
