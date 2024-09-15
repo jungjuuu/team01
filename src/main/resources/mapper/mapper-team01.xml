@@ -139,5 +139,26 @@
 		id="" resultType=""> resultType: 받는 값 </select> <delete id="" parameterType=""> 
 		</delete> <update id="" parameterType=""> id는 dao의 메서드 <set> <if test=""></if> 
 		</set> </update> -->
+		
+		
+		
+		<!-- ID로 회원 정보 조회 -->
+		<select id="selectAccount" parameterType="String" resultType="com.cream.team01.vo.AccountVO">
+		    SELECT * 
+		    FROM accounts 
+		    WHERE account_id = #{accountId}
+		  
+		</select>
+		
+		
+		<!-- 이름과 전화번호로 아이디 찾기 -->
+		 <select id="findId" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.AccountVO">
+		    SELECT a.account_id
+			FROM accounts a
+			JOIN members m ON m.account_no = a.account_no
+			WHERE m.member_name = #{memberName}
+			AND m.member_mobile = #{memberMobile}
+		</select>
+
 
 </mapper>
