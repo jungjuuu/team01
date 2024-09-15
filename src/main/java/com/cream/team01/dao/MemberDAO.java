@@ -22,4 +22,14 @@ public class MemberDAO {
 	    // SQL 쿼리를 실행하여 아이디를 찾음
 	    return session.selectOne("findId", member);
 	}
+
+	  // 아이디와 전화번호로 비밀번호 찾기
+    public AccountVO findPassword(String accountId, String memberMobile) {
+        MemberVO member = new MemberVO();
+        member.setMemberName(accountId); // 이름이 아닌 아이디를 설정합니다.
+        member.setMemberMobile(memberMobile);
+        
+        // SQL 쿼리를 실행하여 비밀번호를 찾음
+        return session.selectOne("findPassword", member);
+    }
 }
