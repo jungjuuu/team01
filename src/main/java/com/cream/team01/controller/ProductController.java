@@ -22,19 +22,19 @@ public class ProductController {
 	@RequestMapping("/category/{categoryNo}")
 	public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo) {
 		List<ProductVO> products = productDAO.getProductsByCategory(categoryNo);
-		ModelAndView mav = new ModelAndView("products"); 
-		mav.addObject("products", products); 
+		ModelAndView result = new ModelAndView("products"); 
+		result.addObject("products", products); 
 
-		return mav; 
+		return result; 
 	}
 
 	// 상품 상세 페이지를 조회
 	@RequestMapping("/detail/{productNo}")
 	public ModelAndView getProductDetail(@PathVariable("productNo") int productNo) {
 		ProductVO product = productDAO.getProductByNo(productNo);
-		ModelAndView mav = new ModelAndView("productDetail"); 
-		mav.addObject("product", product); 
+		ModelAndView result = new ModelAndView("productDetail"); 
+		result.addObject("product", product); 
 
-		return mav; 
+		return result; 
 	}
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>판매자의 상품 목록</title>
+    <link rel="stylesheet" href="/css/team01.css">
+</head>
+<body>
+    <h1 th:text="${seller.brandName}+'님의 판매중인 상품'">판매자의 상품 목록</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>상품 번호</th>
+                <th>상품 이름</th>
+                <th>가격</th>
+                <th>카테고리</th>
+                <th>이미지</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.productNo}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.productPrice} + ' 원'"></td>
+                <td th:text="${product.categoryNo}"></td>
+                <td><img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" width="100"></td>
+                <td><a th:href="@{'/seller/product/edit/' + ${product.productNo}}">수정</a></td>
+                <td><a th:href="@{'/seller/product/delete/' + ${product.productNo}}">삭제</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper-team01">
 
-
+	 <!-- 판매자 정보 조회 -->
+    <select id="getSellerByNo" resultType="com.cream.team01.vo.SellerVO">
+        SELECT seller_no, brand_name, seller_mobile 
+        FROM sellers 
+        WHERE seller_no = #{sellerNo}
+    </select>
+    
+    
 
     <!-- 카테고리 번호에 따른 상품 목록을 조회하는 쿼리 -->
     <select id="getProductsByCategory" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
@@ -14,6 +21,12 @@
     <select id="getProductByNo" resultType="com.cream.team01.vo.ProductVO">
         SELECT * FROM products WHERE product_no = #{productNo}
     </select>
+    
+    <!-- 판매자의 등록된 상품을 가져오는 쿼리 -->
+    <select id="getProductsBySeller" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * FROM products WHERE seller_no = #{sellerNo}
+    </select>
+    
     
     <!-- 상품 추가 쿼리 -->
     <insert id="addProduct" parameterType="com.cream.team01.vo.ProductVO">
