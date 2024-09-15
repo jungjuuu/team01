@@ -12,7 +12,7 @@
 
 
 
-	<!-- 카테고리 번호에 따른 상품 목록을 조회하는 쿼리 -->
+	<!-- 카테고리 번호에 따른 상품 목록을 조회 -->
 	<select id="getProductsByCategory" parameterType="int"
 		resultType="com.cream.team01.vo.ProductVO">
 		SELECT product_no, product_name, product_image,
@@ -46,7 +46,7 @@
 		</association>
 	</resultMap>
 
-	<!-- 판매자의 등록된 상품을 가져오는 쿼리 -->
+	<!-- 판매자의 등록된 상품 조회 -->
 	<select id="getProductsBySeller" parameterType="int"
 		resultMap="productWithCategoryResultMap">
 		SELECT
@@ -66,7 +66,7 @@
 
 
 
-	<!-- 상품 추가 쿼리 -->
+	<!-- 상품 추가 -->
 	<insert id="addProduct"
 		parameterType="com.cream.team01.vo.ProductVO">
 		INSERT INTO products (product_name, product_price,
@@ -100,6 +100,38 @@
 		FROM categories
 		WHERE category_no = #{categoryNo}
 	</select>
+	
+	 <!-- 최신순 정렬 -->
+    <select id="getProductsByCategorySortedByRecent" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * 
+        FROM products 
+        WHERE category_no = #{categoryNo}
+        ORDER BY product_no DESC
+    </select>
+
+    <!-- 높은 가격순 정렬 -->
+    <select id="getProductsByCategorySortedByHighPrice" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * 
+        FROM products 
+        WHERE category_no = #{categoryNo}
+        ORDER BY product_price DESC
+    </select>
+
+    <!-- 낮은 가격순 정렬 -->
+    <select id="getProductsByCategorySortedByLowPrice" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * 
+        FROM products 
+        WHERE category_no = #{categoryNo}
+        ORDER BY product_price ASC
+    </select>
+
+    <!-- 좋아요순 정렬 -->
+    <select id="getProductsByCategorySortedByLikes" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT * 
+        FROM products 
+        WHERE category_no = #{categoryNo}
+        ORDER BY like_count DESC
+    </select>
 
 
 

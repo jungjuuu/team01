@@ -44,5 +44,21 @@ public class ProductDAO {
 		session.delete("deleteProduct", productNo);
 	}
 	
+	public List<ProductVO> getProductsByCategorySortedByRecent(int categoryNo) {
+	    return session.selectList("getProductsByCategorySortedByRecent", categoryNo);
+	}
+
+	public List<ProductVO> getProductsByCategorySortedByHighPrice(int categoryNo) {
+	    return session.selectList("getProductsByCategorySortedByHighPrice", categoryNo);
+	}
+
+	public List<ProductVO> getProductsByCategorySortedByLowPrice(int categoryNo) {
+	    return session.selectList("getProductsByCategorySortedByLowPrice", categoryNo);
+	}
+
+	public List<ProductVO> getProductsByCategorySortedByLikes(int categoryNo) {
+	    return session.selectList("getProductsByCategorySortedByLikes", categoryNo);
+	}
+	
 
 }

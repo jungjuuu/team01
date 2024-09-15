@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cream.team01.dao.CategoryDAO;
@@ -25,11 +26,26 @@ public class ProductController {
 
 	 // 카테고리별 상품 목록을 조회
     @RequestMapping("/category/{categoryNo}")
-    public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo) {
-        List<ProductVO> products = productDAO.getProductsByCategory(categoryNo);
+    public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo, 
+            @RequestParam(value = "sort", required = false) String sort) {
+    	List<ProductVO> products;
+    	// null 체크
+        if (sort == null || sort.isEmpty()) {
+            products = productDAO.getProductsByCategory(categoryNo);
+        } else if (sort.equals("highPrice")) {
+            products = productDAO.getProductsByCategorySortedByHighPrice(categoryNo);
+        } else if (sort.equals("lowPrice")) {
+            products = productDAO.getProductsByCategorySortedByLowPrice(categoryNo);
+        } else if (sort.equals("likes")) {
+            products = productDAO.getProductsByCategorySortedByLikes(categoryNo);
+        } else {
+            products = productDAO.getProductsByCategory(categoryNo);
+        }
         CategoryVO category = categoryDAO.getCategoryNameByNo(categoryNo); 
         
+        
         ModelAndView result = new ModelAndView("products");
+        result.addObject("sort", sort);
         result.addObject("products", products);
         result.addObject("category", category); 
         return result;

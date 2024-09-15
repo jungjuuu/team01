@@ -42,16 +42,26 @@
 
 	<main id="container" class="product-item flex-grow-1"
 		style="background-color: white; padding: 50px;">
-		<div style="font-size: 3ex; font-weight: 600;" th:text="${category.categoryEnglishName}">일단 메인 보면 카테고리
-			영여명칭이 필요??</div>
-		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;" th:text="${category.categoryName}">
-			일단 메인 보면 카테고리 한글명칭이 필요??
+		<div class="select-box">
+			<select id="sortSelect" class="form-select" style="width: 200px;"
+				onchange="sortProducts()">
+				<option value="recent" th:selected="${sort == 'recent'}">최신순</option>
+				<option value="highPrice" th:selected="${sort == 'highPrice'}">높은 가격순</option>
+				<option value="lowPrice" th:selected="${sort == 'lowPrice'}">낮은 가격순</option>
+				<option value="likes" th:selected="${sort == 'likes'}">좋아요순</option>
+			</select>
 		</div>
+		<div style="font-size: 3ex; font-weight: 600;"
+			th:text="${category.categoryEnglishName}">일단 메인 보면 카테고리 영여명칭이
+			필요??</div>
+		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;"
+			th:text="${category.categoryName}">일단 메인 보면 카테고리 한글명칭이 필요??</div>
 
 
 		<div id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
-				<div class="col" th:each="product : ${products}">
-			<a th:href="@{'/products/detail/' + ${product.productNo}}" style="text-decoration: none;">
+			<div class="col" th:each="product : ${products}">
+				<a th:href="@{'/products/detail/' + ${product.productNo}}"
+					style="text-decoration: none;">
 					<div class="card h-100">
 						<img th:src="@{'/images/' + ${product.productImage}}"
 							class="card-img-top" alt="상품 이미지">
@@ -60,8 +70,8 @@
 							<p class="card-text" th:text="${product.productPrice} + ' 원'">가격</p>
 						</div>
 					</div>
-			</a>
-				</div>
+				</a>
+			</div>
 		</div>
 
 
@@ -74,6 +84,12 @@
 	<div th:insert="footer :: footer"></div>
 
 	<script>
+		function sortProducts() {
+			var sortValue = document.getElementById("sortSelect").value;
+			var currentUrl = window.location.pathname;
+			window.location.href = currentUrl + '?sort=' + sortValue; 
+		}
+		
 		/*더보기*/
 		document.addEventListener('DOMContentLoaded', function() {
 			var cardContainer = document.getElementById("cardContainer");
