@@ -13,10 +13,10 @@ public class SellerVO {
 	public void setSellerNo(int sellerNo) {
 		this.sellerNo = sellerNo;
 	}
-	public String getbrandName() {
+	public String getBrandName() {
 		return brandName;
 	}
-	public void setbrandName(String brandName) {
+	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
 	public String getSellerMobile() {

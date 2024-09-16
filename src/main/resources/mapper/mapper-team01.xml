@@ -176,5 +176,23 @@
 		    WHERE account_id = #{accountId}
 		</update>
 		
+		
+		<!-- 회원 가입 id, password -->
+	<insert id="createAccount" parameterType="com.cream.team01.vo.AccountVO"  useGeneratedKeys="true" keyProperty="accountNo">
+	    INSERT INTO accounts (account_id, account_password)
+	    VALUES (#{accountId}, #{accountPassword});
+	</insert>
+	
+	<!-- 멤버 회원가입 -->
+	<insert id="createMember" parameterType="com.cream.team01.vo.MemberVO">
+	    INSERT INTO members (member_name, member_age, member_mobile, member_address, account_no)
+	    VALUES (#{memberName}, #{memberAge}, #{memberMobile}, #{memberAddress},#{accountNo});
+	</insert>
+		
+	<!-- 브랜드 회원가입 -->
+	<insert id="createBrand" parameterType="com.cream.team01.vo.SellerVO">
+	    INSERT INTO sellers (brand_name, seller_mobile, account_no)
+	    VALUES (#{brandName}, #{sellerMobile}, #{accountNo});
+	</insert>
 
 </mapper>

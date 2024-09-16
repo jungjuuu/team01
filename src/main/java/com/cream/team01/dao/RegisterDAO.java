@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.cream.team01.vo.AccountVO;
 import com.cream.team01.vo.MemberVO;
 import com.cream.team01.vo.ProductVO;
+import com.cream.team01.vo.SellerVO;
 
 @Component
 public class RegisterDAO {
@@ -25,6 +26,11 @@ public class RegisterDAO {
     // 멤버회원가입
     public void createMember(MemberVO member) {
         session.insert("createMember", member);
+    }
+    
+    // 브랜드회원가입
+    public void createBrand(SellerVO seller) {
+        session.insert("createBrand", seller);
     }
 
 }
