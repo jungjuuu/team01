@@ -64,4 +64,23 @@
 		</set>
 	</update> -->
 	
+	
+	<!-- ID로 회원 정보 조회 -->
+	<select id="selectAccount" parameterType="String" resultType="com.cream.team01.vo.AccountVO">
+	    SELECT * FROM accounts 
+	    WHERE account_id = #{accountId}
+	    AND account_password = #{accountPassword}
+	</select>
+	
+	
+	<!-- 이름과 전화번호로 아이디 찾기 -->
+	 <select id="findId" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.AccountVO">
+	    SELECT a.account_id
+		FROM accounts a
+		JOIN members m ON m.account_no = a.account_no
+		WHERE m.member_name = #{memberName}
+		AND m.member_mobile = #{memberMobile}
+	</select>
+
+	
 </mapper>
