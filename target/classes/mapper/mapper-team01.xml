@@ -169,7 +169,7 @@
 	        AND m.member_mobile = #{memberMobile}
     	</select>
     	
-    	<!-- 아이디과 전화번호로 비밀번호 재설정 -->
+    	<!-- 비밀번호 재설정 -->
 		<update id="updatePassword" parameterType="com.cream.team01.vo.AccountVO">
 		    UPDATE accounts
 		    SET account_password = #{accountPassword}

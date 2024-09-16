@@ -72,28 +72,35 @@ public class FindPasswordController {
 	    @RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
 	    public String updatePassword(
 	            @RequestParam("accountPassword") String accountPassword,
+	            @RequestParam("accountPasswordConfirm") String accountPasswordConfirm,
 	            HttpSession session) {
 	        // 세션에서 accountId를 가져온다
 	        String accountId = (String) session.getAttribute("accountId");
 	        if (accountId != null) {
-	            try {
-	                int result = accountDAO.updatePassword(accountId, accountPassword);
-	                if (result > 0) {
-	                    return "redirect:/main";  // 성공 시 메인 페이지로 리다이렉트
-	                } else {
-	                    session.setAttribute("errorMessage", "비밀번호를 수정할 수 없습니다.");
+	            if (accountPassword.equals(accountPasswordConfirm)) {  // 비밀번호 확인
+	                try {
+	                    int result = accountDAO.updatePassword(accountId, accountPassword);
+	                    if (result > 0) {
+	                        session.setAttribute("successMessage", "비밀번호가 성공적으로 수정되었습니다.");
+	                        return "redirect:/main";  // 성공 시 메인 페이지로 리다이렉트
+	                    } else {
+	                        session.setAttribute("errorMessage", "비밀번호를 수정할 수 없습니다.");
+	                        return "redirect:/updatepassword";  // 에러 메시지와 함께 다시 리다이렉트
+	                    }
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                    session.setAttribute("errorMessage", "오류가 발생했습니다: " + e.getMessage());
 	                    return "redirect:/updatepassword";  // 에러 메시지와 함께 다시 리다이렉트
 	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	                session.setAttribute("errorMessage", "오류가 발생했습니다: " + e.getMessage());
-	                return "redirect:/updatepassword";  // 에러 메시지와 함께 다시 리다이렉트
+	            } else {
+	                session.setAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	                return "redirect:/updatepassword";  // 비밀번호 불일치 에러
 	            }
 	        } else {
 	            return "redirect:/findpassword";  // accountId가 없으면 비밀번호 찾기 페이지로 리다이렉트
 	        }
 	    }
-}
+	}
 
 	    
 	    
