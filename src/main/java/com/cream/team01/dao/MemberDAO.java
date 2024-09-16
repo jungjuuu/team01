@@ -32,4 +32,5 @@ public class MemberDAO {
         // SQL 쿼리를 실행하여 비밀번호를 찾음
         return session.selectOne("findPassword", member);
     }
+
 }

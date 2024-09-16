@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cream.team01.vo.AccountVO;
+import com.cream.team01.vo.MemberVO;
 
 @Component
 public class AccountDAO {
@@ -17,5 +18,13 @@ public class AccountDAO {
 		  return session.selectOne("selectAccount", accountId);
 	}
 	
-	
+	// 비밀번호 재설정
+    public int updatePassword(String accountId, String accountPassword) {
+        AccountVO account = new AccountVO();
+        account.setAccountId(accountId); // 아이디 설정
+        account.setAccountPassword(accountPassword); // 새 비밀번호 설정
+        
+        // SQL 쿼리를 실행하여 비밀번호를 업데이트
+        return session.update("updatePassword", account); // selectOne이 아닌 update 사용
+    }
 }
