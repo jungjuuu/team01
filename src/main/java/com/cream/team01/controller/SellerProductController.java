@@ -15,71 +15,121 @@ import com.cream.team01.dao.SellerDAO;
 import com.cream.team01.vo.ProductVO;
 import com.cream.team01.vo.SellerVO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/seller/products")
 public class SellerProductController {
 
-	@Autowired
-	private ProductDAO productDAO;
+    @Autowired
+    private ProductDAO productDAO;
 
-	@Autowired
-	private SellerDAO sellerDAO;
+    @Autowired
+    private SellerDAO sellerDAO;
 
-	// 판매자의 상품 목록 조회 result
+    // 판매자의 상품 목록 조회
+    @RequestMapping("/list")
+    public ModelAndView sellerProductList(HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");  // 세션에서 sellerNo 가져오기
 
-	@RequestMapping("/list")
-	public ModelAndView sellerProductList() {
-		// (@PathVariable("sellerNo") int sellerNo)
-		// sellerNo이 1이라는 가정 하에 상품 목록 조회
-		int sellerNo = 1;
+        if (sellerNo == null) {
+            return new ModelAndView("redirect:/accountlogin");  
+        }
 
-		SellerVO seller = sellerDAO.getSellerByNo(sellerNo);
+        SellerVO seller = sellerDAO.getSellerByNo(sellerNo);
+        List<ProductVO> products = productDAO.getProductsBySeller(sellerNo);
 
-		List<ProductVO> products = productDAO.getProductsBySeller(sellerNo);
+        ModelAndView result = new ModelAndView("sellerProductList");
+        result.addObject("seller", seller);
+        result.addObject("products", products);
+        return result;
+    }
 
-		ModelAndView result = new ModelAndView("sellerProductList"); // 상품 목록 뷰
-		result.addObject("seller", seller);
-		result.addObject("products", products);
-		return result;
-	}
+    // 상품 등록 폼
+    @RequestMapping("/add")
+    public ModelAndView addProductForm(HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");
 
-	// 상품 등록 폼
-	@RequestMapping("/add")
-	public ModelAndView addProductForm() {
-		ModelAndView result = new ModelAndView("addProduct_form");
-		result.addObject("product", new ProductVO()); // 빈 폼을 위한 객체 전달
-		return result;
-	}
+        if (sellerNo == null) {
+            return new ModelAndView("redirect:/accountlogin");  
+        }
 
-	// 상품 등록 처리
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute ProductVO product) {
-		// sellerNo을 1로 가정하고 상품 등록
-		product.setSellerNo(1); // 로그인 기능이 없으므로 sellerNo을 1로 하드코딩
-		productDAO.addProduct(product);
-		return "redirect:/seller/products/list";
-	}
+        ModelAndView result = new ModelAndView("addProduct_form");
+        result.addObject("product", new ProductVO());  // 빈 폼을 위한 객체 전달
+        return result;
+    }
 
-	// 상품 수정 폼
-	@RequestMapping("/edit/{productNo}")
-	public ModelAndView editProductForm(@PathVariable("productNo") int productNo) {
-		ProductVO product = productDAO.getProductByNo(productNo);
-		ModelAndView result = new ModelAndView("editProduct_form");
-		result.addObject("product", product);
-		return result;
-	}
+    // 상품 등록 처리
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addProduct(@ModelAttribute ProductVO product, HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");
 
-	// 상품 수정 처리
-	@RequestMapping(value = "/edit/{productNo}", method = RequestMethod.POST)
-	public String editProduct(@ModelAttribute ProductVO product) {
-		productDAO.updateProduct(product);
-		return "redirect:/seller/products/list";
-	}
+        if (sellerNo == null) {
+            return "redirect:/accountlogin";  
+        }
 
-	// 상품 삭제 처리
-	@RequestMapping("/delete/{productNo}")
-	public String deleteProduct(@PathVariable("productNo") int productNo) {
-		productDAO.deleteProduct(productNo); // DAO에서 해당 상품 삭제 처리
-		return "redirect:/seller/products/list"; // 삭제 후 상품 목록으로 리다이렉트
-	}
+        product.setSellerNo(sellerNo);  
+        productDAO.addProduct(product);
+        return "redirect:/seller/products/list";
+    }
+
+    // 상품 수정 폼
+    @RequestMapping("/edit/{productNo}")
+    public ModelAndView editProductForm(@PathVariable("productNo") int productNo, HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");
+
+        if (sellerNo == null) {
+            return new ModelAndView("redirect:/accountlogin");  
+        }
+
+        ProductVO product = productDAO.getProductByNo(productNo);
+        
+        // 상품의 판매자가 현재 로그인된 판매자인지 확인
+        if (product.getSellerNo() != sellerNo) {
+            return new ModelAndView("redirect:/seller/products/list");  
+        }
+
+        ModelAndView result = new ModelAndView("editProduct_form");
+        result.addObject("product", product);
+        return result;
+    }
+
+    // 상품 수정 처리
+    @RequestMapping(value = "/edit/{productNo}", method = RequestMethod.POST)
+    public String editProduct(@ModelAttribute ProductVO product, HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");
+
+        if (sellerNo == null) {
+            return "redirect:/accountlogin";  
+        }
+
+        // 수정하려는 상품이 현재 로그인한 판매자의 것인지 확인
+        if (product.getSellerNo() != sellerNo) {
+            return "redirect:/seller/products/list";  
+        }
+
+        productDAO.updateProduct(product);
+        return "redirect:/seller/products/list";
+    }
+
+    // 상품 삭제 처리
+    @RequestMapping("/delete/{productNo}")
+    public String deleteProduct(@PathVariable("productNo") int productNo, HttpSession session) {
+        Integer sellerNo = (Integer) session.getAttribute("sellerNo");
+
+        if (sellerNo == null) {
+            return "redirect:/accountlogin"; 
+        }
+
+        ProductVO product = productDAO.getProductByNo(productNo);
+
+        // 삭제하려는 상품이 현재 로그인된 판매자의 것인지 확인
+        if (product.getSellerNo() != sellerNo) {
+            return "redirect:/seller/products/list";  
+        }
+
+        productDAO.deleteProduct(productNo); 
+        return "redirect:/seller/products/list";
+    }
 }
+

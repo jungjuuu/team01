@@ -18,6 +18,18 @@ public class AccountDAO {
 		  return session.selectOne("selectAccount", accountId);
 	}
 	
+	public int getMemberNoByAccountNo(int accountNo) {
+        return session.selectOne("getMemberNoByAccountNo", accountNo); 
+    }
+	
+	public int getSellerNoByAccountNo(int accountNo) {
+        return session.selectOne("getSellerNoByAccountNo", accountNo);  // 셀러 정보 가져오기
+    }
+
+	
+	
+	
+	
 	// 비밀번호 재설정
     public int updatePassword(String accountId, String accountPassword) {
         AccountVO account = new AccountVO();

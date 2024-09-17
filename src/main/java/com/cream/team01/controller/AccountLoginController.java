@@ -41,10 +41,19 @@ public class AccountLoginController {
 	        // 입력된 비밀번호와 DB의 비밀번호가 일치하는지 확인
 	        if (account != null && account.getAccountPassword().equals(accountPassword)) {
 	            session.setAttribute("accountId", accountId);  // 세션에 로그인 정보 저장
+	            session.setAttribute("accountLevel", account.getAccountLevel());
 	            loginMessage = "로그인 성공!";  // 로그인 성공 시 메시지
 	            System.out.println("로그인 시도한 사용자 정보: " + account.toString());
-	            // 로그인 성공 시 메인 페이지로 이동
-	            return "redirect:/home";  
+	            if (account.getAccountLevel() == 1) { 
+	                Integer memberNo = accountDAO.getMemberNoByAccountNo(account.getAccountNo());
+	                session.setAttribute("memberNo", memberNo);
+	                return "redirect:/main";  // 일단은 메인으로 돌아가도록
+	            } else  {  // 셀러 로그인
+	                Integer sellerNo = accountDAO.getSellerNoByAccountNo(account.getAccountNo());
+	                session.setAttribute("sellerNo", sellerNo);
+	                return "redirect:/seller/products/list"; // 셀러 마이페이지로 가도 괜찮을듯 (추후 메인으로 가도록 변경해도 ㄱㅊ)
+	            }
+	            
 	        } else {
 	            // 로그인 실패 메시지를 세션에 저장
 	            loginMessage = "로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.";

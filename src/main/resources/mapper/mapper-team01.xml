@@ -98,40 +98,49 @@
 		resultType="com.cream.team01.vo.CategoryVO">
 		SELECT category_no, category_name
 		FROM categories
-		WHERE category_no = #{categoryNo}
+		WHERE
+		category_no = #{categoryNo}
 	</select>
-	
-	 <!-- 최신순 정렬 -->
-    <select id="getProductsByCategorySortedByRecent" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * 
-        FROM products 
-        WHERE category_no = #{categoryNo}
-        ORDER BY product_no DESC
-    </select>
 
-    <!-- 높은 가격순 정렬 -->
-    <select id="getProductsByCategorySortedByHighPrice" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * 
-        FROM products 
-        WHERE category_no = #{categoryNo}
-        ORDER BY product_price DESC
-    </select>
+	<!-- 최신순 정렬 -->
+	<select id="getProductsByCategorySortedByRecent"
+		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+		SELECT *
+		FROM products
+		WHERE category_no
+		= #{categoryNo}
+		ORDER BY product_no DESC
+	</select>
 
-    <!-- 낮은 가격순 정렬 -->
-    <select id="getProductsByCategorySortedByLowPrice" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * 
-        FROM products 
-        WHERE category_no = #{categoryNo}
-        ORDER BY product_price ASC
-    </select>
+	<!-- 높은 가격순 정렬 -->
+	<select id="getProductsByCategorySortedByHighPrice"
+		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+		SELECT *
+		FROM products
+		WHERE category_no
+		= #{categoryNo}
+		ORDER BY product_price DESC
+	</select>
 
-    <!-- 좋아요순 정렬 -->
-    <select id="getProductsByCategorySortedByLikes" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-        SELECT * 
-        FROM products 
-        WHERE category_no = #{categoryNo}
-        ORDER BY like_count DESC
-    </select>
+	<!-- 낮은 가격순 정렬 -->
+	<select id="getProductsByCategorySortedByLowPrice"
+		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+		SELECT *
+		FROM products
+		WHERE category_no
+		= #{categoryNo}
+		ORDER BY product_price ASC
+	</select>
+
+	<!-- 좋아요순 정렬 -->
+	<select id="getProductsByCategorySortedByLikes"
+		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+		SELECT *
+		FROM products
+		WHERE category_no
+		= #{categoryNo}
+		ORDER BY like_count DESC
+	</select>
 
 
 
@@ -139,60 +148,95 @@
 		id="" resultType=""> resultType: 받는 값 </select> <delete id="" parameterType=""> 
 		</delete> <update id="" parameterType=""> id는 dao의 메서드 <set> <if test=""></if> 
 		</set> </update> -->
-		
-		
-		
-		<!-- ID로 회원 정보 조회 -->
-		<select id="selectAccount" parameterType="String" resultType="com.cream.team01.vo.AccountVO">
-		    SELECT * 
-		    FROM accounts 
-		    WHERE account_id = #{accountId}
-		  
-		</select>
-		
-		
-		<!-- 이름과 전화번호로 아이디 찾기 -->
-		 <select id="findId" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.AccountVO">
-		    SELECT a.account_id
-			FROM accounts a
-			JOIN members m ON m.account_no = a.account_no
-			WHERE m.member_name = #{memberName}
-			AND m.member_mobile = #{memberMobile}
-		</select>
-		
-		<!-- 아이디과 전화번호로 비밀번호 찾기 -->
-		<select id="findPassword" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.AccountVO">
-	        SELECT a.account_password
-	        FROM accounts a
-	        JOIN members m ON m.account_no = a.account_no
-	        WHERE a.account_id = #{memberName} 
-	        AND m.member_mobile = #{memberMobile}
-    	</select>
-    	
-    	<!-- 비밀번호 재설정 -->
-		<update id="updatePassword" parameterType="com.cream.team01.vo.AccountVO">
-		    UPDATE accounts
-		    SET account_password = #{accountPassword}
-		    WHERE account_id = #{accountId}
-		</update>
-		
-		
-		<!-- 회원 가입 id, password -->
-	<insert id="createAccount" parameterType="com.cream.team01.vo.AccountVO"  useGeneratedKeys="true" keyProperty="accountNo">
-	    INSERT INTO accounts (account_id, account_password)
-	    VALUES (#{accountId}, #{accountPassword});
+
+
+
+	<!-- ID로 회원 정보 조회 -->
+	<select id="selectAccount" parameterType="String"
+		resultType="com.cream.team01.vo.AccountVO">
+		SELECT *
+		FROM accounts
+		WHERE account_id = #{accountId}
+
+	</select>
+
+	<!-- accountNo로 memberNo 가져오기 -->
+	<select id="getMemberNoByAccountNo" parameterType="int"
+		resultType="int">
+		SELECT member_no
+		FROM MEMBERS
+		WHERE account_no = #{accountNo}
+	</select>
+
+	<!-- accountNo로 sellerNo 가져오기 -->
+	<select id="getSellerNoByAccountNo" parameterType="int"
+		resultType="int">
+		SELECT seller_no
+		FROM SELLERS
+		WHERE account_no = #{accountNo}
+	</select>
+
+
+	<!-- 이름과 전화번호로 아이디 찾기 -->
+	<select id="findId" parameterType="com.cream.team01.vo.MemberVO"
+		resultType="com.cream.team01.vo.AccountVO">
+		SELECT a.account_id
+		FROM accounts a
+		JOIN members m ON
+		m.account_no = a.account_no
+		WHERE m.member_name = #{memberName}
+		AND
+		m.member_mobile = #{memberMobile}
+	</select>
+
+	<!-- 아이디과 전화번호로 비밀번호 찾기 -->
+	<select id="findPassword"
+		parameterType="com.cream.team01.vo.MemberVO"
+		resultType="com.cream.team01.vo.AccountVO">
+		SELECT a.account_password
+		FROM accounts a
+		JOIN members m ON
+		m.account_no = a.account_no
+		WHERE a.account_id = #{memberName}
+		AND
+		m.member_mobile = #{memberMobile}
+	</select>
+
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePassword"
+		parameterType="com.cream.team01.vo.AccountVO">
+		UPDATE accounts
+		SET account_password = #{accountPassword}
+		WHERE account_id = #{accountId}
+	</update>
+
+
+	<!-- 회원 가입 id, password -->
+	<insert id="createAccount"
+		parameterType="com.cream.team01.vo.AccountVO" useGeneratedKeys="true"
+		keyProperty="accountNo">
+		INSERT INTO accounts (account_id, account_password)
+		VALUES
+		(#{accountId}, #{accountPassword});
 	</insert>
-	
+
 	<!-- 멤버 회원가입 -->
-	<insert id="createMember" parameterType="com.cream.team01.vo.MemberVO">
-	    INSERT INTO members (member_name, member_age, member_mobile, member_address, account_no)
-	    VALUES (#{memberName}, #{memberAge}, #{memberMobile}, #{memberAddress},#{accountNo});
+	<insert id="createMember"
+		parameterType="com.cream.team01.vo.MemberVO">
+		INSERT INTO members (member_name, member_age,
+		member_mobile, member_address,
+		account_no)
+		VALUES (#{memberName},
+		#{memberAge}, #{memberMobile},
+		#{memberAddress},#{accountNo});
 	</insert>
-		
+
 	<!-- 브랜드 회원가입 -->
-	<insert id="createBrand" parameterType="com.cream.team01.vo.SellerVO">
-	    INSERT INTO sellers (brand_name, seller_mobile, account_no)
-	    VALUES (#{brandName}, #{sellerMobile}, #{accountNo});
+	<insert id="createBrand"
+		parameterType="com.cream.team01.vo.SellerVO">
+		INSERT INTO sellers (brand_name, seller_mobile,
+		account_no)
+		VALUES (#{brandName}, #{sellerMobile}, #{accountNo});
 	</insert>
 
 </mapper>
