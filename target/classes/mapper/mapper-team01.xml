@@ -244,10 +244,20 @@
 		account_no)
 		VALUES (#{brandName}, #{sellerMobile}, #{accountNo});
 	</insert>
-	
-	
-	<select id="getMemberInfo" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.MemberVO">
+
+	<!-- 결제페이지 멤버 정보 가져오기 -->
+	<select id="getMemberInfo"
+		parameterType="com.cream.team01.vo.MemberVO"
+		resultType="com.cream.team01.vo.MemberVO">
 		select * from members where member_no = #{memberNo}
+	</select>
+
+	<!-- 회원 주문 내역 가져오기 -->
+	<select id="getOrderListByMemberNo" parameterType="int"
+		resultType="com.cream.team01.vo.OrderVO">
+		select * from order_details od join orders o on od.order_no
+		= o.order_no join products p on od.product_no = p.product_no where
+		o.member_no = #{memberNo};
 	</select>
 
 </mapper>
