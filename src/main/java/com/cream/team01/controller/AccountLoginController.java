@@ -61,7 +61,13 @@ public class AccountLoginController {
 	            // 로그인 실패 시 다시 로그인 폼으로 리다이렉트
 	            return "redirect:/accountlogin";  
 	        }
-	    }  
+	    }
+	    
+	    @RequestMapping("/accountlogout")
+	    public String logout(HttpSession session) {
+	        session.invalidate();
+	        return "redirect:/";
+	    }
 
 	}
 
