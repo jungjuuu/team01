@@ -244,5 +244,10 @@
 		account_no)
 		VALUES (#{brandName}, #{sellerMobile}, #{accountNo});
 	</insert>
+	
+	
+	<select id="getMemberInfo" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.MemberVO">
+		select * from members where member_no = #{memberNo}
+	</select>
 
 </mapper>

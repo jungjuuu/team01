@@ -33,4 +33,11 @@ public class MemberDAO {
         return session.selectOne("findPassword", member);
     }
 
+    
+    // 결제 시 회원 정보 가져오기
+	public MemberVO getMemberInfo(int memberNo) {
+		
+		return session.selectOne("getMemberInfo", memberNo);
+	}
+
 }
