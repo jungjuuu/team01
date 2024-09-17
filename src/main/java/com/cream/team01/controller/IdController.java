@@ -13,7 +13,7 @@ import com.cream.team01.vo.AccountVO;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class FindIdController {
+public class IdController {
 
 	  @Autowired
 	    private MemberDAO memberDAO;
