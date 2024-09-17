@@ -3,7 +3,7 @@ package com.cream.team01.vo;
 public class SellerVO {
 
 	public int sellerNo;
-	public String brand;
+	public String brandName;
 	public String sellerMobile;
 	public int accountNo;
 	
@@ -13,11 +13,11 @@ public class SellerVO {
 	public void setSellerNo(int sellerNo) {
 		this.sellerNo = sellerNo;
 	}
-	public String getBrand() {
-		return brand;
+	public String getBrandName() {
+		return brandName;
 	}
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 	public String getSellerMobile() {
 		return sellerMobile;
@@ -34,7 +34,7 @@ public class SellerVO {
 	
 	@Override
 	public String toString() {
-		return "SellerVO [sellerNo=" + sellerNo + ", brand=" + brand + ", sellerMobile=" + sellerMobile + ", accountNo="
+		return "SellerVO [sellerNo=" + sellerNo + ", brandName=" + brandName + ", sellerMobile=" + sellerMobile + ", accountNo="
 				+ accountNo + "]";
 	}
 	
