@@ -1,11 +1,14 @@
 package com.cream.team01.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cream.team01.vo.AccountVO;
 import com.cream.team01.vo.MemberVO;
+import com.cream.team01.vo.OrderVO;
 
 @Component
 public class MemberDAO {
@@ -28,7 +31,7 @@ public class MemberDAO {
         MemberVO member = new MemberVO();
         member.setMemberName(accountId); // 이름이 아닌 아이디를 설정합니다.
         member.setMemberMobile(memberMobile);
-        
+       
         // SQL 쿼리를 실행하여 비밀번호를 찾음
         return session.selectOne("findPassword", member);
     }
@@ -39,5 +42,13 @@ public class MemberDAO {
 		
 		return session.selectOne("getMemberInfo", memberNo);
 	}
+
+	// 로그인 회원의 주문 정보 가져오기
+	public List<OrderVO> getOrderListByMemberNo(int memberNo) {
+
+		return session.selectList("getOrderListByMemberNo", memberNo);
+	}
+	
+	
 
 }
