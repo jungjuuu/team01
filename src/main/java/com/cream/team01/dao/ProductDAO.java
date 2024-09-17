@@ -44,6 +44,10 @@ public class ProductDAO {
 		session.delete("deleteProduct", productNo);
 	}
 	
+	public List<ProductVO> getNewProducts() {
+	    return session.selectList("getNewProducts");
+	}
+	
 	public List<ProductVO> getProductsByCategorySortedByRecent(int categoryNo) {
 	    return session.selectList("getProductsByCategorySortedByRecent", categoryNo);
 	}
