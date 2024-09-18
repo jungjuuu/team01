@@ -7,13 +7,14 @@
          <a href="/" ><logo class="wrapper" style="margin-bottom: 25px; margin-left: 4ex; font-size: 5ex;">CREAM</logo></a>
         <span style="margin-left: 57em;">
             <a href="/" id="home" name="home" style="margin-left: 2ex; font-size: 3.5ex; color: white;">HOME</a>
-            <a href="#" id="mypage" name="mypage" style="margin-left: 2ex; color: white;">MY PAGE</a>
+            <a href="/order" id="mypage" name="mypage" style="margin-left: 2ex; color: white;">MY PAGE</a>
             <i class="bi bi-person"></i>
             <a href="#" id="like" name="like" style="margin-left: 2ex; color: white;">MY LIKE</a>
             <i class="bi bi-heart-fill"></i>
             <a href="#" id="shoppingBag" name="shoppingBag" style="margin-left: 2ex; color: white;">SHOPPING BAG</a>
             <i class="bi bi-basket3"></i>
-            <a href="#" id="login" name="login" style="margin-left: 2ex; color: white;">LOGIN</a>
+            <a  th:if="${session.accountId == null}" href="/accountlogin" id="login" name="login" style="margin-left: 2ex; color: white;">LOGIN</a>
+            <a  th:if="${session.accountId != null}" href="/accountlogout" id="login" name="login" style="margin-left: 2ex; color: white;">LOGOUT</a>
             <i class="bi bi-door-open"></i>
         </span>
         <div style="margin-top: 1ex;">

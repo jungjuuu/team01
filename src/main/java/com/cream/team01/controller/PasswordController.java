@@ -17,7 +17,7 @@ import com.cream.team01.vo.ProductVO;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class FindPasswordController {
+public class PasswordController {
 	
 		@Autowired
 	    private AccountDAO accountDAO;

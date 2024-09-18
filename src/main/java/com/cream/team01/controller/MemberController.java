@@ -1,51 +1,47 @@
 package com.cream.team01.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cream.team01.dao.MemberDAO;
 import com.cream.team01.dao.ProductDAO;
 import com.cream.team01.vo.MemberVO;
-import com.cream.team01.vo.ProductVO;
+import com.cream.team01.vo.OrderVO;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class BuyController {
+public class MemberController {
 
-	@Autowired
-	private ProductDAO productDAO;
-	
-	@Autowired
-	private MemberDAO memberDAO;
-	
-	
-	
 	@Autowired
 	HttpSession session;
 	
-	@RequestMapping("/buyproduct/{productNo}")
-	public ModelAndView getBuyProduct(@PathVariable("productNo") int productNo) {
+	@Autowired
+	MemberDAO memberDAO;
+	
+	@Autowired
+	ProductDAO productDAO;
+	
+	
+	//주문내역
+	@RequestMapping("/order")
+	public ModelAndView getOrderList() {
 		
 		int memberNo = (Integer)session.getAttribute("memberNo");
 		
 		MemberVO member = memberDAO.getMemberInfo(memberNo);
 		
-		ProductVO buyproduct = productDAO.getProductByNo(productNo);
+		List<OrderVO> orderList = memberDAO.getOrderListByMemberNo(memberNo);
 		
-		ModelAndView result = new ModelAndView("buyproduct"); 
+		ModelAndView result = new ModelAndView("orderlist"); 
 		
-		
-		result.addObject("buyproduct", buyproduct);
 		result.addObject("member", member);
-
-		return result; 
+		result.addObject("orderList", orderList);
 		
+		return result;
 	}
-	
-	
-	
 }
