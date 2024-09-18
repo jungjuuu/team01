@@ -28,9 +28,12 @@ public class RegisterController {
 		 member.setAccountNo(account.getAccountNo());   
 		 registerDAO.createMember(member);
 		 
+		
+		 
         ModelAndView result = new ModelAndView("/memberregister"); 
         return result;
     }
+
 
 	// 브랜드 회원가입
 	@RequestMapping("/sellerregister")

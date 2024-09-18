@@ -76,6 +76,14 @@ body {
 	cursor: pointer;
 }
 
+#btn2 {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	font-size: 17px;
+	cursor: pointer;
+}
+
 
 
 
@@ -184,68 +192,26 @@ body {
 			style="text-align: center; margin-top: 20px;">
 			<button id="btn" type="button" class="btn btn-outline-secondary">더보기v</button>
 		</div>
-
-		<div id="container" class="product-item flex-grow-1"
-			style="background-color: white; padding: 50px;">
-			<div style="font-size: 3ex; font-weight: 600; margin-top: 15px;">NEW
+		<div style="font-size: 3ex; font-weight: 600;">NEW
 				IN</div>
-			<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">신규
-				등록 상품</div>
-			<div id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
-				<div class="col">
+		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">신규 등록 상품</div>
+		<div id="cardContainer2" class="row row-cols-1 row-cols-md-5 g-4">
+			<div class="col" th:each="product : ${newProducts}">
+				<a th:href="@{'/products/detail/' + ${product.productNo}}" style="text-decoration: none;">
 					<div class="card h-100">
-						<img src="/images/top07.png" class="card-img-top" alt="...">
+						<img th:src="@{'/images/' + ${product.productImage}}"
+							class="card-img-top" alt="상품 이미지">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a longer card with supporting
-								text below as a natural lead-in to additional content. This
-								content is a little bit longer.</p>
+							<h5 class="card-title" th:text="${product.productName}">상품명</h5>
+							<p class="card-text" th:text="${product.productPrice} + ' 원'">가격</p>
 						</div>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card h-100">
-						<img src="/images/top08.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a short card.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card h-100">
-						<img src="/images/top09.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a longer card with supporting
-								text below as a natural lead-in to additional content.</p>
-						</div><p>테스트용 찐막</p>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card h-100">
-						<img src="/images/top10.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a longer card with supporting
-								text below as a natural lead-in to additional content. This
-								content is a little bit longer.</p><p>테스트용</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col">
-					<div class="card h-100">
-						<img src="/images/top11.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a longer card with supporting
-								text below as a natural lead-in to additional content. This
-								content is a little bit longer.</p><p>테스트용</p>
-						</div>
-					</div>
-				</div>
+				</a>
 			</div>
+		</div>
+		<div class="text-center mt-4"
+			style="text-align: center; margin-top: 20px;">
+			<button id="btn2" type="button" class="btn btn-outline-secondary">더보기v</button>
 		</div>
 	</main>
 	<div id="container" class="product-item flex-grow-1"
@@ -276,11 +242,17 @@ body {
 	/*더보기*/
 	document.addEventListener('DOMContentLoaded', function() {
 		var cardContainer = document.getElementById("cardContainer");
+		var cardContainer2 = document.getElementById("cardContainer2");
 		var btn = document.getElementById("btn");
+		var btn2 = document.getElementById("btn2");
 		var initialCards = 5; // 초기 카드 수
+		var initialCards2 = 5; // 초기 카드 수
 		var cardsToShow = 5; // 더보기 클릭 시 추가 카드 수
+		var cardsToShow2 = 5; // 더보기 클릭 시 추가 카드 수
 		var totalCards = cardContainer.children.length; // 총 카드 수
+		var totalCards2 = cardContainer2.children.length; // 총 카드 수
 		var visibleCards = initialCards; // 현재 보이는 카드 수
+		var visibleCards2 = initialCards2; // 현재 보이는 카드 수
 
 		// 초기에 카드 표시
 		updateCardVisibility();
@@ -294,6 +266,18 @@ body {
 				btn.style.display = 'none';
 			}
 		});
+		
+		updateCardVisibility2();
+		
+		btn2.addEventListener('click', function() {
+			visibleCards2 += cardsToShow2; // 보이는 카드 수 증가
+			updateCardVisibility2();
+
+			// 모든 카드가 보이면 버튼 숨김
+			if (visibleCards2 >= totalCards2) {
+				btn2.style.display = 'none';
+			}
+		});
 
 		function updateCardVisibility() {
 			for (var i = 0; i < totalCards; i++) {
@@ -301,6 +285,16 @@ body {
 					cardContainer.children[i].style.display = 'block'; // 카드 표시
 				} else {
 					cardContainer.children[i].style.display = 'none'; // 카드 숨김
+				}
+			}
+		}
+		
+		function updateCardVisibility2() {
+			for (var i = 0; i < totalCards2; i++) {
+				if (i < visibleCards2) {
+					cardContainer2.children[i].style.display = 'block'; // 카드 표시
+				} else {
+					cardContainer2.children[i].style.display = 'none'; // 카드 숨김
 				}
 			}
 		}
