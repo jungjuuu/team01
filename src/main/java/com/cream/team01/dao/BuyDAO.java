@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cream.team01.vo.BuyVO;
 import com.cream.team01.vo.OrderVO;
 
 @Component

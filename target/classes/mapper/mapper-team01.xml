@@ -255,10 +255,11 @@
 	</select>
 	
 	<!-- 결제시 주문내역에 추가 -->
-	<insert id="addOrder" parameterType="com.cream.team01.vo.OrderVO">
+	<insert id="addOrder" parameterType="com.cream.team01.vo.OrderVO" useGeneratedKeys="true" keyProperty="orderNo">
 		insert into orders (order_date, member_no) values (now(), #{memberNo});
 	</insert>
 	
+	<!-- 주문내역추가 후 주문상세내역 추가 -->
 	<insert id="addOrderDetail" parameterType="com.cream.team01.vo.OrderVO">
 		insert into order_details (order_quantity, order_price, order_no, product_no) values (#{orderQuantity}, #{orderPrice}, #{orderNo}, #{productNo})
 	</insert>

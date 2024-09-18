@@ -65,10 +65,12 @@ public class BuyController {
 		OrderVO order = new OrderVO();
 		order.setMemberNo(memberNo);
 		
-		buyDAO.addOrder(order);
+		// 자동 증가된 order_no를 반환받음
+	    buyDAO.addOrder(order);
+	    int orderNo = order.getOrderNo(); // orderNo가 여기에서 설정됨
 		
-		int orderNo = order.getOrderNo();
 		
+		//주문 상세 추가
 		OrderVO orderDetail = new OrderVO();
 		orderDetail.setOrderQuantity(quantity);
 		orderDetail.setOrderPrice(orderPrice);
