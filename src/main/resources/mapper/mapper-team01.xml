@@ -253,5 +253,14 @@
 		= o.order_no join products p on od.product_no = p.product_no where
 		o.member_no = #{memberNo};
 	</select>
+	
+	<!-- 결제시 주문내역에 추가 -->
+	<insert id="addOrder" parameterType="com.cream.team01.vo.OrderVO">
+		insert into orders (order_date, member_no) values (now(), #{memberNo});
+	</insert>
+	
+	<insert id="addOrderDetail" parameterType="com.cream.team01.vo.OrderVO">
+		insert into order_details (order_quantity, order_price, order_no, product_no) values (#{orderQuantity}, #{orderPrice}, #{orderNo}, #{productNo})
+	</insert>
 
 </mapper>
