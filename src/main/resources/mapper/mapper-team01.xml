@@ -331,4 +331,12 @@
 		inquiry_content = #{inquiryContent},
 		inquiry_date = #{inquiryDate}
 	</select>
+	
+	 <!-- 회원이 좋아요한 상품 목록 조회 -->
+    <select id="getLikedProductsByMemberNo" parameterType="int" resultType="com.cream.team01.vo.ProductVO">
+        SELECT p.product_no, p.product_name, p.product_image, p.product_price
+        FROM likes l
+        JOIN products p ON l.product_no = p.product_no
+        WHERE l.member_no = #{memberNo};
+    </select>
 </mapper>

@@ -54,8 +54,7 @@ public class AccountLoginController {
 	                return "redirect:/seller/products/list"; // 셀러 마이페이지로 가도 괜찮을듯 (추후 메인으로 가도록 변경해도 ㄱㅊ)
 	            }
 	            
-	            // 로그인 성공 시 메인 페이지로 이동
-	            return "redirect:/main";  
+	            
 	        } else {
 	            // 로그인 실패 메시지를 세션에 저장
 	            loginMessage = "로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.";
