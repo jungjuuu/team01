@@ -14,12 +14,18 @@ import com.cream.team01.vo.BoardVO;
 import com.cream.team01.vo.MemberVO;
 import com.cream.team01.vo.SellerVO;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class MemberInquiryWriteController {
 	
 	@Autowired
 	private BoardDAO boardDAO;
+	
+	@Autowired
+	private HttpSession session;
+	
 	
 	
 	@RequestMapping(value = {"/memberinquirywrite"})
@@ -29,14 +35,19 @@ public class MemberInquiryWriteController {
 	}
 	
 	
+	
 	@RequestMapping("/addmemberinquirywrite")
-	public String addMemberInquiryWriteForm(BoardVO board) {
+	public String addMemberInquiryWriteForm(BoardVO board, HttpSession session) {
 		
-		System.out.println(board);
+		Integer memberNo = (Integer) session.getAttribute("memberNo");
+		Integer productNo = (Integer) session.getAttribute("productNo");
+		
+		board.setMemberNo(memberNo);
+		board.setProductNo(productNo);
 		    
-		    boardDAO.addMemberInquiryWrite(board);
+		boardDAO.addMemberInquiryWrite(board);
 
-		    return "/memberinquirywrite";
+		return "/memberinquirywrite";
 }
 	
 
