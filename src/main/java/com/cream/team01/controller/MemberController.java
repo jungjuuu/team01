@@ -44,4 +44,21 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	
+	//회원 마이페이지
+	@RequestMapping("/membermypage")
+	public ModelAndView memberMyPageMain() {
+		
+		int memberNo = (Integer)session.getAttribute("memberNo");
+		
+		MemberVO member = memberDAO.getMemberInfo(memberNo);
+		
+		ModelAndView result = new ModelAndView("membermypage");
+		
+		result.addObject("member", member);
+		
+		return result;
+	}
+	
 }
