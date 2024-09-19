@@ -21,7 +21,7 @@ public class BoardDAO {
 
     // 문의하기
     public void creatememberInquriyWrite(BoardVO board) {
-        session.insert("creatememberInquriyWrite", board);
+        session.insert("addMemberInquiryWrite", board);
     }
     
 
