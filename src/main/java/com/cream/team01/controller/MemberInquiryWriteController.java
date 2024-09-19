@@ -1,18 +1,14 @@
 package com.cream.team01.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cream.team01.dao.BoardDAO;
 import com.cream.team01.vo.BoardVO;
-import com.cream.team01.vo.MemberVO;
-import com.cream.team01.vo.SellerVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,31 +22,23 @@ public class MemberInquiryWriteController {
 	@Autowired
 	private HttpSession session;
 	
-	
-	
-	@RequestMapping(value = {"/memberinquirywrite"})
-	public ModelAndView getForm() {
-		ModelAndView result = new ModelAndView("/memberinquirywrite");
-		return result; 
+	// 문의 폼
+    @GetMapping("/inquiry/{productNo}")
+    public ModelAndView inquiryForm(@PathVariable("productNo") int productNo) {
+        ModelAndView result = new ModelAndView("memberinquirywrite");
+        result.addObject("productNo", productNo); 
+        return result;
+    }
+
+    // 문의 등록 처리
+	@PostMapping("/addmemberinquirywrite")
+	public String addMemberInquiryWriteForm(BoardVO board, HttpSession session) {
+		Integer memberNo = (Integer) session.getAttribute("memberNo");
+		board.setMemberNo(memberNo);
+		boardDAO.addMemberInquiryWrite(board);
+		return "redirect:/memberinquiry"; 
 	}
 	
-	
-	
-	@RequestMapping("/addmemberinquirywrite")
-	public String addMemberInquiryWriteForm(BoardVO board, HttpSession session) {
-		
-		Integer memberNo = (Integer) session.getAttribute("memberNo");
-		Integer productNo = (Integer) session.getAttribute("productNo");
-		
-		board.setMemberNo(memberNo);
-		board.setProductNo(productNo);
-		    
-		boardDAO.addMemberInquiryWrite(board);
-
-		return "/memberinquirywrite";
-}
-	
-
 }
 
 
