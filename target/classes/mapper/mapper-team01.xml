@@ -353,12 +353,13 @@
     WHERE member_no = #{memberNo}
 </select>
 		<insert id="addMemberInquiryWrite" parameterType="com.cream.team01.dao.BoardDAO">
-		INTO inquiry_board (inquiry_title, inquiry_content, member_no, seller_no)
+		INTO inquiry_board (inquiry_title, inquiry_content, inquiry_date, member_no, seller_no)
     	VALUES (
         #{inquiryTitle},
         #{inquiryContent},
-        #{memberNo}, 
-        #{sellerNo} )
+        NOW(), 
+        (SELECT member_no FROM members WHERE member_no = #{memberNo}), 
+        (SELECT seller_no FROM sellers WHERE seller_no = #{sellerNo}));
 	</insert> 
 		
 	

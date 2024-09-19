@@ -1,6 +1,7 @@
 package com.cream.team01.dao;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +19,6 @@ public class BoardDAO {
 
     
     // 문의하기
-    public void creatememberInquriyWrite(BoardVO board) {
     public void addMemberInquiryWrite(BoardVO board)  {
         session.insert("addMemberInquiryWrite", board);
     }
