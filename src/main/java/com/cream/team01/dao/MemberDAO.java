@@ -17,14 +17,21 @@ public class MemberDAO {
 	SqlSession session;
 
 	public AccountVO findId(String memberName, String memberMobile) {
-	    // MemberVO 객체를 생성하여 이름과 전화번호를 설정
-	    MemberVO member = new MemberVO();
-	    member.setMemberName(memberName);
-	    member.setMemberMobile(memberMobile);
-	    
-	    // SQL 쿼리를 실행하여 아이디를 찾음
-	    return session.selectOne("findId", member);
-	}
+		
+		 // 입력값을 출력하여 디버깅
+        System.out.println("입력된 이름: " + memberName);
+        System.out.println("입력된 전화번호: " + memberMobile);
+        
+        // MemberVO 객체를 생성하여 이름과 전화번호를 설정
+        MemberVO member = new MemberVO();
+        // 공백을 제거한 이름과 전화번호 설정
+        member.setMemberName(memberName.trim());
+        member.setMemberMobile(memberMobile.trim());
+        
+        // SQL 쿼리를 실행하여 아이디를 찾음
+        return session.selectOne("findId", member);
+    }
+
 
 	  // 아이디와 전화번호로 비밀번호 찾기
     public AccountVO findPassword(String accountId, String memberMobile) {

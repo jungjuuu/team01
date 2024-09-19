@@ -186,15 +186,12 @@
 
 
 	<!-- 이름과 전화번호로 아이디 찾기 -->
-	<select id="findId" parameterType="com.cream.team01.vo.MemberVO"
-		resultType="com.cream.team01.vo.AccountVO">
-		SELECT a.account_id
+	<select id="findId" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.AccountVO">
+	    SELECT a.account_id
 		FROM accounts a
-		JOIN members m ON
-		m.account_no = a.account_no
+		JOIN members m ON m.account_no = a.account_no
 		WHERE m.member_name = #{memberName}
-		AND
-		m.member_mobile = #{memberMobile}
+		AND m.member_mobile = #{memberMobile}
 	</select>
 
 	<!-- 아이디과 전화번호로 비밀번호 찾기 -->
