@@ -110,7 +110,7 @@
 <hr class="hr1" noshade>
 
 <form>
-    <span> ▷ 총 3개의 게시물이 있습니다. </span>
+    <span>▷ 총 <span th:text="${inquiryList.size()}"></span>개의 게시물이 있습니다. </span>
     <span class="right">
         <span class="grey" id="strong">SELECT</span>
         <select name="filter">
@@ -127,27 +127,18 @@
     <tr>
         <th>번호</th>
         <th>제목</th>
+        <th>문의 내용</th>
         <th>글쓴이</th>
         <th>일시</th>
     </tr>
-    <tr>
-        <td class="center" style="width: 20ex;">1</td>
-        <td class="left" style="width: 150ex;">문의합니다</td>
-        <td class="center">박정주</td>
-        <td class="center">2022-05-18</td>     
+    <tr th:each="inquiry : ${inquiryList}">
+          <td class="center" style="width: 20ex;" th:text="${inquiry.inquiryNo}">1</td>
+        <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryTitle}">문의합니다</td>
+        <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryContent}">문의 내용</td>
+        <td class="center" th:text="${inquiry.memberName}">글쓴이</td> 
+        <td class="center" th:text="${inquiry.inquiryDate}">2022-05-18</td>
     </tr>
-    <tr>
-        <td class="center">2</td>
-        <td class="left">문의합니다</td>
-        <td class="center">박정주</td>
-        <td class="center">2022-05-18</td>    
-    </tr>
-    <tr>
-        <td class="center">3</td>
-        <td class="left">문의합니다</td>
-        <td class="center">박정주</td>
-        <td class="center">2022-05-18</td>  
-    </tr>
+
 </table>
 <br>
 

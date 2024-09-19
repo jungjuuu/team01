@@ -29,11 +29,14 @@ public class ProductController {
 
 	@Autowired
 	private LikeDAO likeDAO;
+	
+	@Autowired
+	HttpSession session;
 
 	// 카테고리별 상품 목록을 조회
 	@RequestMapping("/category/{categoryNo}")
 	public ModelAndView getProductsByCategory(@PathVariable("categoryNo") int categoryNo,
-			@RequestParam(value = "sort", required = false) String sort, HttpSession session) {
+			@RequestParam(value = "sort", required = false) String sort) {
 		Integer memberNo = (Integer) session.getAttribute("memberNo");
 		List<ProductVO> products;
 		// null 체크
@@ -73,7 +76,12 @@ public class ProductController {
 	// 상품 상세 페이지를 조회
 	@RequestMapping("/detail/{productNo}")
 	public ModelAndView getProductDetail(@PathVariable("productNo") int productNo) {
+		Integer memberNo = (Integer) session.getAttribute("memberNo");
 		ProductVO product = productDAO.getProductByNo(productNo);
+		if (memberNo != null) {
+			boolean isLiked = likeDAO.checkLike(product.getProductNo(), memberNo);
+			product.setLiked(isLiked);
+		}
 		ModelAndView result = new ModelAndView("productDetail");
 		result.addObject("product", product);
 

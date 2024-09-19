@@ -322,5 +322,14 @@
 	</select>
 	
 	
+   	 	SELECT 
+	        inquiry_no, 
+	        inquiry_title, 
+	        inquiry_content, 
+	        inquiry_date, 
+	        m.member_name 
+	    FROM inquiry_board ib
+	    JOIN members m ON ib.member_no = m.member_no
+	</select>
 
 </mapper>
