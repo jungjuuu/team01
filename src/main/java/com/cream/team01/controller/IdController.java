@@ -22,7 +22,8 @@ public class IdController {
 	    @RequestMapping(value = "/findid", method = RequestMethod.GET)
 	    public String showFindIdForm() {
 	        return "findid";  // `findid.html` 페이지를 반환 (아이디 찾기 폼 페이지)
-	    } 
+	    }
+
 	    // POST 요청 처리: 아이디 찾기 로직
 	    @RequestMapping(value = "/findid", method = RequestMethod.POST)
 	    public String findId(@RequestParam("memberName") String memberName,
