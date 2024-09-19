@@ -364,6 +364,11 @@
         );
 	</insert>
 		
+	    SELECT member_name 
+	    FROM members 
+	    WHERE member_no = #{memberNo}
+	</select>
+	
 	
 
 </mapper>
