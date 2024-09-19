@@ -1,10 +1,13 @@
 package com.cream.team01.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cream.team01.vo.LikeVO;
+import com.cream.team01.vo.ProductVO;
 
 @Component
 public class LikeDAO {
@@ -36,5 +39,10 @@ public class LikeDAO {
     // 특정 상품의 총 좋아요 수를 반환
     public int getLikesCount(int productNo) {
         return session.selectOne("getLikesCount", productNo);
+    }
+
+    // 회원이 좋아요한 상품 목록 조회
+    public List<ProductVO> getLikedProductsByMemberNo(int memberNo) {
+        return session.selectList("getLikedProductsByMemberNo", memberNo);
     }
 }

@@ -4,36 +4,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
    rel="stylesheet"
    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
    crossorigin="anonymous">
-<style>
-input[type="text"], input[type="password"] 
-{
-   padding: 10px;
-   margin: 5px 0;
-   border: 1px solid #ccc;
-   border-radius: 5px;
+   <link rel="stylesheet" href="/css/team01.css">
+<style> 
+input[type="text"], input[type="password"] {
+    padding: 15px;
+    height: 50px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 </style>
 </head>
+
 <body>
+<div th:insert="header :: header"></div>
    <div>
-      <div class="row" style="text-align: center; margin-top: 15em;">
+      <div class="row" style="text-align: center; margin-top: 10em;">
          <h1 style="font-size: 3em; font-weight: bold; font-style: italic;">CREAM</h1>
          <p style="font-weight: bold;">EVERYTHING AROUND ME</p>
       </div>
       
-      
-<!-- 로그인 결과 메시지 표시 -->
-    <div>
-        <!-- 세션에 저장된 메시지를 출력 -->
-        <p th:text="${session.loginMessage}"></p> <!-- 로그인 성공/실패 메시지 표시 -->
-    </div>
-
 
 
       <div class="row">
@@ -48,7 +44,7 @@ input[type="text"], input[type="password"]
                type="text" name="memberMobile" id="memberMobile" placeholder="전화번호를 입력하세요"
                style="width: 20%; padding: 10px; margin-bottom: 10px; box-sizing: border-box;"><br>
             <input type="submit" id="myBtn" name="myBtn" value="아이디 찾기"
-               style="width: 20%; padding: 12px; background-color: lightgray; border: none; color: black; font-family: 'NanumSquareNeoHeavy'; font-weight: bold; box-sizing: border-box; border-radius: 8px;">
+               style="width: 20%; height: 50px; padding: 10px; margin-bottom: 15px; background-color: lightgray; border: none; color: black; font-family: 'NanumSquareNeoHeavy'; font-weight: bold; box-sizing: border-box; border-radius: 8px;">
 
             <div
                style="display: flex; justify-content: center; gap: 20px; width: 30%; margin-top: 10px;">
@@ -68,20 +64,26 @@ input[type="text"], input[type="password"]
 
                     <!-- 로그인 성공 시 찾은 아이디를 표시하는 부분 -->
 					<p th:text="${session.accountId != null ? '찾은 아이디: ' + session.accountId : ''}"></p>
- 
-                         
+ 					
                         </ul>
                      </div>
                   </div>
                </nav>
 
             </div>
+            <!-- 로그인 결과 메시지 표시 -->
+				    <div>
+				        <!-- 세션에 저장된 메시지를 출력 -->
+				        <p th:text="${session.loginMessage}"></p> <!-- 로그인 성공/실패 메시지 표시 -->
+				    </div>
+                         
          </form>
 
       </div>
 
 
    </div>
+    <div th:insert="footer :: footer"></div>
 </body>
 
 <script

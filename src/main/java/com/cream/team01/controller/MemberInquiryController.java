@@ -25,7 +25,6 @@ public class MemberInquiryController {
 	        model.addAttribute("inquiryList", inquiryList);
 	        return "memberinquiry";
 	    }
-
 }
 
 
