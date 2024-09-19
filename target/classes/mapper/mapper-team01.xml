@@ -141,11 +141,11 @@
 	<!-- 카테고리에서 좋아요순 정렬 -->
 	<select id="getProductsByCategorySortedByLikes"
 		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
-		SELECT *
-		FROM products
-		WHERE category_no
-		= #{categoryNo}
-		ORDER BY like_count DESC
+		SELECT p.*,
+		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
+		FROM products p
+		WHERE p.category_no = #{categoryNo}
+		ORDER BY likes_count DESC
 	</select>
 
 
@@ -259,40 +259,48 @@
 		= o.order_no join products p on od.product_no = p.product_no where
 		o.member_no = #{memberNo};
 	</select>
-	
+
 	<!-- 좋아요 여부 확인 -->
-    <select id="checkLike" parameterType="com.cream.team01.vo.LikeVO" resultType="int">
-        SELECT COUNT(*) 
-        FROM likes 
-        WHERE product_no = #{productNo} 
-          AND member_no = #{memberNo}
-    </select>
+	<select id="checkLike"
+		parameterType="com.cream.team01.vo.LikeVO" resultType="int">
+		SELECT COUNT(*)
+		FROM likes
+		WHERE product_no = #{productNo}
+		AND member_no = #{memberNo}
+	</select>
 
-    <!-- 좋아요 추가 -->
-    <insert id="addLike" parameterType="com.cream.team01.vo.LikeVO">
-        INSERT INTO likes (product_no, member_no) 
-        VALUES (#{productNo}, #{memberNo})
-    </insert>
-
-    <!-- 좋아요 삭제 -->
-    <delete id="removeLike" parameterType="com.cream.team01.vo.LikeVO">
-        DELETE FROM likes 
-        WHERE product_no = #{productNo} 
-          AND member_no = #{memberNo}
-    </delete>
-
-    <!-- 좋아요 개수 조회 -->
-    <select id="getLikesCount" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM likes WHERE product_no = #{productNo};
-    </select>
-	<!-- 결제시 주문내역에 추가 -->
-	<insert id="addOrder" parameterType="com.cream.team01.vo.OrderVO" useGeneratedKeys="true" keyProperty="orderNo">
-		insert into orders (order_date, member_no) values (now(), #{memberNo});
+	<!-- 좋아요 추가 -->
+	<insert id="addLike" parameterType="com.cream.team01.vo.LikeVO">
+		INSERT INTO likes (product_no, member_no)
+		VALUES (#{productNo}, #{memberNo})
 	</insert>
-	
+
+	<!-- 좋아요 삭제 -->
+	<delete id="removeLike"
+		parameterType="com.cream.team01.vo.LikeVO">
+		DELETE FROM likes
+		WHERE product_no = #{productNo}
+		AND member_no = #{memberNo}
+	</delete>
+
+	<!-- 좋아요 개수 조회 -->
+	<select id="getLikesCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM likes WHERE product_no = #{productNo};
+	</select>
+	<!-- 결제시 주문내역에 추가 -->
+	<insert id="addOrder"
+		parameterType="com.cream.team01.vo.OrderVO" useGeneratedKeys="true"
+		keyProperty="orderNo">
+		insert into orders (order_date, member_no) values (now(),
+		#{memberNo});
+	</insert>
+
 	<!-- 주문내역추가 후 주문상세내역 추가 -->
-	<insert id="addOrderDetail" parameterType="com.cream.team01.vo.OrderVO">
-		insert into order_details (order_quantity, order_price, order_no, product_no) values (#{orderQuantity}, #{orderPrice}, #{orderNo}, #{productNo})
+	<insert id="addOrderDetail"
+		parameterType="com.cream.team01.vo.OrderVO">
+		insert into order_details (order_quantity, order_price,
+		order_no, product_no) values (#{orderQuantity}, #{orderPrice},
+		#{orderNo}, #{productNo})
 	</insert>
 
 </mapper>
