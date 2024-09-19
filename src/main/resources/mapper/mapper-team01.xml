@@ -332,4 +332,13 @@
 	    JOIN members m ON ib.member_no = m.member_no
 	</select>
 
+ 	<!-- 문의 게시판 내역 불러오기 -->
+ 	<select id="memberBoardList" parameterType="com.cream.team01.vo.BoardVO" resultType="com.cream.team01.vo.BoardVO">
+		SELECT * 
+		FROM inquiry_board 
+		WHERE inquiry_no = #{inquiryNo},
+		inquiry_title = #{inquiryTitle},
+		inquiry_content = #{inquiryContent},
+		inquiry_date = #{inquiryDate}
+	</select>
 </mapper>
