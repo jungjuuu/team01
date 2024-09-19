@@ -314,6 +314,8 @@
 		VALUES (#{inquiryTitle}, #{inquiryContent});
 	</insert>
 	
+	
+	
 		
 	<!-- 장바구니 아이템 리스트 불러오기 -->
 	<select id="getCartItems" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.CartVO" >
@@ -321,7 +323,6 @@
 	</select>
 	
 	
-	<select id="getMemberInquiries" resultType="com.cream.team01.vo.BoardVO">
    	 	SELECT 
 	        inquiry_no, 
 	        inquiry_title, 
