@@ -320,5 +320,26 @@
 	<select id="getCartItems" parameterType="com.cream.team01.vo.MemberVO" resultType="com.cream.team01.vo.CartVO" >
 		select * from cart_details cd join products p on cd.product_no = p.product_no join carts c on cd.cart_no = c.cart_no where member_no = #{memberNo};
 	</select>
+	
+	
+	<select id="getMemberInquiries" resultType="com.cream.team01.vo.BoardVO">
+   	 	SELECT 
+	        inquiry_no, 
+	        inquiry_title, 
+	        inquiry_content, 
+	        inquiry_date, 
+	        m.member_name 
+	    FROM inquiry_board ib
+	    JOIN members m ON ib.member_no = m.member_no
+	</select>
 
+ 	<!-- 문의 게시판 내역 불러오기 -->
+ 	<select id="memberBoardList" parameterType="com.cream.team01.vo.BoardVO" resultType="com.cream.team01.vo.BoardVO">
+		SELECT * 
+		FROM inquiry_board 
+		WHERE inquiry_no = #{inquiryNo},
+		inquiry_title = #{inquiryTitle},
+		inquiry_content = #{inquiryContent},
+		inquiry_date = #{inquiryDate}
+	</select>
 </mapper>

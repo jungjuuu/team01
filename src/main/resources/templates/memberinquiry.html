@@ -115,7 +115,7 @@
         <span class="grey" id="strong">SELECT</span>
         <select name="filter">
             <option value="제목">제목</option>
-            <option value="글쓴이">글쓴이</option>
+            <option value="글쓴이" >글쓴이</option>
         </select>
         <input type="text">
         <input type="button" name="검색" class="gradient" value="검색">
@@ -139,9 +139,15 @@
         <td class="center" th:text="${inquiry.inquiryDate}">2022-05-18</td>
     </tr>
 
+    <tr th:each="inquiryBoardList : ${inquiryBoardList}">
+        <td class="center" style="width: 20ex;" th:text="${inquiryBoardList.inquiryNo}">1</td>
+        <td class="left" style="width: 150ex;" th:text="${inquiryBoard.inquiryTitle}">문의합니다</td>
+        <td class="center"   th:text="${member.memberName}">박정주</td>
+        <td class="center"  th:text="${orderList.orderDate}">일시</td>     
+    </tr>
+   
 </table>
 <br>
-
 
 
 <span class="right">

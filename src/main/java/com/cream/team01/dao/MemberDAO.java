@@ -49,6 +49,5 @@ public class MemberDAO {
 		return session.selectList("getOrderListByMemberNo", memberNo);
 	}
 	
-	
 
 }

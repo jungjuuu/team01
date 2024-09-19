@@ -36,9 +36,6 @@ public class CartController {
 		MemberVO member = memberDAO.getMemberInfo(memberNo);
 		
 		
-		//일단 대충만들어논거
-		int cartNo = 1;
-		
 		List<CartVO> cartItems = cartDAO.getCartItems(member);
 
 		ModelAndView result = new ModelAndView("cart");
@@ -48,6 +45,11 @@ public class CartController {
 
 		return result;
 
+	}
+	
+	// 장바구니버튼 누를 시 장바구니 리스트에 추가
+	public ModelAndView addCartItem() {
+		return null;
 	}
 
 }

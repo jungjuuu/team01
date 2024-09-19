@@ -1,6 +1,7 @@
 package com.cream.team01.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,4 +51,7 @@ public class LikeController {
     public int getLikesCount(@RequestParam("productNo") int productNo) {
         return likeDAO.getLikesCount(productNo);
     }
+    
+  
+   
 }
