@@ -23,8 +23,12 @@ public class BoardDAO {
     public void creatememberInquriyWrite(BoardVO board) {
         session.insert("addMemberInquiryWrite", board);
     }
-    
 
+ // 문의 목록 가져오기
+    public List<BoardVO> getMemberInquiries() {
+        return session.selectList("getMemberInquiries");
+    }
 
 }
+
 
