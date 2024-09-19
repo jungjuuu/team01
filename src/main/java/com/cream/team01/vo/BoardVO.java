@@ -17,7 +17,17 @@ public class BoardVO {
 	public String inquiryContent;
 	public String inquiryDate;
 	private String memberName;
+	private int productNo;
 	
+	
+	
+	public int getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
+	}
 	
 	public String getMemberName() {
         return memberName;
