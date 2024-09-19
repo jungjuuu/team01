@@ -1,10 +1,17 @@
 package com.cream.team01.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.cream.team01.vo.AccountVO;
 
@@ -14,8 +21,8 @@ import jakarta.servlet.http.HttpSession;
 public class AccountLoginController {
 
 	 @Autowired
-	    private com.cream.team01.dao.AccountDAO accountDAO;  // DAO 주입
-
+	    private com.cream.team01.dao.AccountDAO accountDAO;
+	 
 	    // 로그인 페이지로 이동 (GET 요청)
 	    @RequestMapping(value = "/accountlogin", method = RequestMethod.GET)
 	    public String showLoginForm(HttpSession session) {
@@ -50,13 +57,8 @@ public class AccountLoginController {
 	            session.setAttribute("loginMessage", loginMessage);
 	            return "accountlogin"; // 실패 시 로그인 페이지로 돌아가도록 수정
 	        }
-	    }
-	    
-	    @RequestMapping("/accountlogout")
-	    public String logout(HttpSession session) {
-	        session.invalidate();
-	        return "redirect:/";
-	    }
-
+	    }  
+	   
 	}
+
 
