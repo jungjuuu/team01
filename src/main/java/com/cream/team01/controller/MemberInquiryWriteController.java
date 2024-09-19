@@ -20,7 +20,7 @@ public class MemberInquiryWriteController {
 			@ModelAttribute BoardVO board) {
 		
 		boardDAO.creatememberInquriyWrite(board);
-		ModelAndView result = new ModelAndView("/memberinquirywrtie"); 
+		ModelAndView result = new ModelAndView("/creatememberInquriyWrite"); 
         return result;
 	}
 	
