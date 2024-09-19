@@ -352,5 +352,15 @@
     FROM members 
     WHERE member_no = #{memberNo}
 </select>
+		<insert id="addMemberInquiryWrite" parameterType="com.cream.team01.dao.BoardDAO">
+		INTO inquiry_board (inquiry_title, inquiry_content, member_no, seller_no)
+    	VALUES (
+        #{inquiryTitle},
+        #{inquiryContent},
+        #{memberNo}, 
+        #{sellerNo} )
+	</insert> 
+		
+	
 
 </mapper>
