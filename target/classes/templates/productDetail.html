@@ -32,55 +32,43 @@
 }
 
 
-          /* Footer 고정 */
-        body {
-            margin: 0;
-            padding-bottom: 60px; 
-            position: relative;
-            min-height: 100vh;
-        }
-
-         footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%; 
-            height: 150px; 
-          	
-          
-        } 
+         
 </style>
 </head>
 <body>
     <div th:insert="header :: header"></div>
 
     <main id="container" class="product-item flex-grow-1" style="background-color: white; padding: 50px; margin-left: 30ex; margin-top: 10ex;">
-        <div style="font-size: 3ex; font-weight: 600; margin-left: 26ex;" th:text="${product.productName}">상품명</div>
-        <div style="margin-bottom: 2ex; font-size: 2ex; margin-left: 40ex; color: gray;">상품 상세 이미지</div>
+        <div style="font-size: 3ex; font-weight: 600; margin-left: 10ex;" th:text="${product.productName}">상품명</div>
+        <div style="margin-bottom: 2ex; font-size: 2ex; margin-left: 15ex; color: gray; ">상품 상세 이미지</div>
 
         <div class="row">
             <div class="col-md-5">
-                <img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" style="width: 60%; height: auto; margin-left: 40ex;">
+                <img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" style="width: 70%; height: auto; margin-left: 15ex;">
             </div>
 
             
             <div class="col-md-1 d-flex justify-content-center align-items-center" >
-                <div class='v-line' style="margin-left: 40ex;"></div>
+                <div class='v-line' style="margin-left: 30ex;"></div>
             </div>
 
-            <div class="col-md-6" >
+            <div class="col-md-6" style="margin-bottom: 10ex;">
                 <h3 th:text="${product.productName}" style="font-weight: 600;">상품명</h3>
                 <p th:text="${product.productPrice} + ' 원'"  style="margin-top: 2ex; font-size: 3ex">가격</p>
 
                 <p style="font-weight: 600; width: 50ex;">
                     <a class="btn btn-outline-dark" th:href="'/buyproduct/' + ${product.productNo}" style="width: 100%; padding: 12px;">결제</a>
                 </p>
-                <button class="like-button btn btn-outline-danger"
-							th:data-product-no="${product.productNo}">좋아요
-							<i class="bi"
-								th:class="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
-						</button>
-                <button class="btn btn-secondary col-md-2" style="margin-left: 2ex;">장바구니에 추가<i class="bi bi-basket3"></i></button>
+                <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="like-button btn btn-danger col-md-3" style="margin-left: 1ex; height: 5ex; display: flex; justify-content: center; align-items: center; gap: 5px;"
+                th:data-product-no="${product.productNo}">
+            <span>좋아요</span>
+            <i class="bi" th:class="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
+        </button>
+        <button class="btn btn-secondary col-md-3" style="height: 5ex;">장바구니에 추가<i class="bi bi-basket3" style="margin-left: 5px;"></i></button>
+    </div>
 
+	
                 <div>
                     <p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">추가 혜택</p>
                     <span style="color: gray; font-weight: 600;">포인트</span>
