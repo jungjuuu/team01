@@ -49,13 +49,14 @@ public class SellerProductController {
     @RequestMapping("/add")
     public ModelAndView addProductForm(HttpSession session) {
         Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-
+        SellerVO seller = sellerDAO.getSellerByNo(sellerNo);
         if (sellerNo == null) {
             return new ModelAndView("redirect:/accountlogin");  
         }
 
         ModelAndView result = new ModelAndView("addProduct_form");
         result.addObject("product", new ProductVO());  // 빈 폼을 위한 객체 전달
+        result.addObject("seller", seller);   
         return result;
     }
 
