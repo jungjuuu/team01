@@ -148,15 +148,6 @@
 		ORDER BY likes_count DESC
 	</select>
 
-
-
-	<!-- <insert id="" parameterType=""> id : dao의 메서드 이름과 같음 </insert> <select 
-		id="" resultType=""> resultType: 받는 값 </select> <delete id="" parameterType=""> 
-		</delete> <update id="" parameterType=""> id는 dao의 메서드 <set> <if test=""></if> 
-		</set> </update> -->
-
-
-
 	<!-- ID로 회원 정보 조회 -->
 	<select id="selectAccount" parameterType="String"
 		resultType="com.cream.team01.vo.AccountVO">
@@ -301,6 +292,13 @@
 		insert into order_details (order_quantity, order_price,
 		order_no, product_no) values (#{orderQuantity}, #{orderPrice},
 		#{orderNo}, #{productNo})
+	</insert>
+	
+	<!-- 문의하기 -->
+	<insert id="addMemberInquiryWrite"
+		parameterType="com.cream.team01.vo.BoardVO">
+		INSERT INTO members (inquiry_title, inquiry_content)
+		VALUES (#{inquiryTitle}, #{inquiryContent});
 	</insert>
 
 </mapper>
