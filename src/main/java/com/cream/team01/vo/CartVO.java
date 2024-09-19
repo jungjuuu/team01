@@ -4,7 +4,6 @@ public class CartVO {
 
 	public int cartNo;
 	public int cartDetailNo;
-	public int cartQuantity;
 	public int productNo;
 	public int memberNo;
 	
@@ -12,7 +11,7 @@ public class CartVO {
 	public String productImage;
 	public int productPrice;
 	
-	
+
 	
 	
 	public String getProductName() {
@@ -45,12 +44,6 @@ public class CartVO {
 	public void setCartDetailNo(int cartDetailNo) {
 		this.cartDetailNo = cartDetailNo;
 	}
-	public int getCartQuantity() {
-		return cartQuantity;
-	}
-	public void setCartQuantity(int cartQuantity) {
-		this.cartQuantity = cartQuantity;
-	}
 	public int getProductNo() {
 		return productNo;
 	}
@@ -67,8 +60,7 @@ public class CartVO {
 	
 	@Override
 	public String toString() {
-		return "CartVO [cartNo=" + cartNo + ", cartDetailNo=" + cartDetailNo + ", cartQuantity=" + cartQuantity
-				+ ", productNo=" + productNo + ", memberNo=" + memberNo + ", productName=" + productName
+		return "CartVO [cartNo=" + cartNo + ", cartDetailNo=" + cartDetailNo + ", productNo=" + productNo + ", memberNo=" + memberNo + ", productName=" + productName
 				+ ", productImage=" + productImage + ", productPrice=" + productPrice + "]";
 	}
 	

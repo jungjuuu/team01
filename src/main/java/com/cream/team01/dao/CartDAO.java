@@ -20,6 +20,26 @@ public class CartDAO {
 		
 		return session.selectList("getCartItems", member);
 	}
+
+	public void addCartItem(CartVO cart) {
+
+		session.insert("addCartItem", cart);
+	}
+
+	public void addCartDetail(CartVO cartDetail) {
+
+		session.insert("addCartDetail", cartDetail);
+	}
+
+	public CartVO getCartByMemberNo(Integer memberNo) {
+		
+		return session.selectOne("getCartByMemberNo", memberNo);
+	}
+	
+	public void deleteCartItems(CartVO cvo) {
+		
+		session.delete("deleteCartItems", cvo);
+	}
 	
 	
 }
