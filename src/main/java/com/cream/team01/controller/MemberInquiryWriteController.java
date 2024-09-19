@@ -39,6 +39,7 @@ public class MemberInquiryWriteController {
 		return "redirect:/memberinquiry"; 
 	}
 	
+
 }
 
 

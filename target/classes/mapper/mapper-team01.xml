@@ -380,5 +380,12 @@
 
 
 
-
+	
+	<select id="getMemberNameByMemberNo" parameterType="int" resultType="String">
+	    SELECT member_name 
+	    FROM members 
+	    WHERE member_no = #{memberNo}
+	</select>
+	
+	
 </mapper>
