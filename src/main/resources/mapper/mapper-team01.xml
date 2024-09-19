@@ -151,9 +151,6 @@
 	<select id="getProductsByCategorySortedByLikes"
 		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
 		SELECT p.*,
-		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
-		FROM products p
-		WHERE p.category_no = #{categoryNo}
 		(SELECT COUNT(*) FROM likes
 		WHERE product_no = p.product_no) AS likes_count
 		FROM products p
@@ -161,15 +158,6 @@
 		p.category_no = #{categoryNo}
 		ORDER BY likes_count DESC
 	</select>
-
-
-
-	<!-- <insert id="" parameterType=""> id : dao의 메서드 이름과 같음 </insert> <select 
-		id="" resultType=""> resultType: 받는 값 </select> <delete id="" parameterType=""> 
-		</delete> <update id="" parameterType=""> id는 dao의 메서드 <set> <if test=""></if> 
-		</set> </update> -->
-
-
 
 	<!-- ID로 회원 정보 조회 -->
 	<select id="selectAccount" parameterType="String"
@@ -285,7 +273,8 @@
 
 	<!-- 좋아요 추가 -->
 	<insert id="addLike" parameterType="com.cream.team01.vo.LikeVO">
-		INSERT INTO likes (product_no, member_no)
+		INSERT INTO likes
+		(product_no, member_no)
 		VALUES (#{productNo}, #{memberNo})
 	</insert>
 
@@ -294,7 +283,8 @@
 		parameterType="com.cream.team01.vo.LikeVO">
 		DELETE FROM likes
 		WHERE product_no = #{productNo}
-		AND member_no = #{memberNo}
+		AND
+		member_no = #{memberNo}
 	</delete>
 
 	<!-- 좋아요 개수 조회 -->
@@ -315,6 +305,13 @@
 		insert into order_details (order_quantity, order_price,
 		order_no, product_no) values (#{orderQuantity}, #{orderPrice},
 		#{orderNo}, #{productNo})
+	</insert>
+	
+	<!-- 문의하기 -->
+	<insert id="addMemberInquiryWrite"
+		parameterType="com.cream.team01.vo.BoardVO">
+		INSERT INTO members (inquiry_title, inquiry_content)
+		VALUES (#{inquiryTitle}, #{inquiryContent});
 	</insert>
 
 </mapper>
