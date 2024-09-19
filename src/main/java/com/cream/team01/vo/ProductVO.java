@@ -8,7 +8,22 @@ public class ProductVO {
 	public int categoryNo;
 	public int sellerNo;
 	public String productImage;
+	public boolean liked;
+	public int likesCount;
 	
+	public boolean isLiked() {
+		return liked;
+	}
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
+	public int getLikesCount() {
+		return likesCount;
+	}
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
+	}
+
 	public CategoryVO category;
 	
 	public CategoryVO getCategory() {

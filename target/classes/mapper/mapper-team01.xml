@@ -259,5 +259,31 @@
 		= o.order_no join products p on od.product_no = p.product_no where
 		o.member_no = #{memberNo};
 	</select>
+	
+	<!-- 좋아요 여부 확인 -->
+    <select id="checkLike" parameterType="com.cream.team01.vo.LikeVO" resultType="int">
+        SELECT COUNT(*) 
+        FROM likes 
+        WHERE product_no = #{productNo} 
+          AND member_no = #{memberNo}
+    </select>
+
+    <!-- 좋아요 추가 -->
+    <insert id="addLike" parameterType="com.cream.team01.vo.LikeVO">
+        INSERT INTO likes (product_no, member_no) 
+        VALUES (#{productNo}, #{memberNo})
+    </insert>
+
+    <!-- 좋아요 삭제 -->
+    <delete id="removeLike" parameterType="com.cream.team01.vo.LikeVO">
+        DELETE FROM likes 
+        WHERE product_no = #{productNo} 
+          AND member_no = #{memberNo}
+    </delete>
+
+    <!-- 좋아요 개수 조회 -->
+    <select id="getLikesCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM likes WHERE product_no = #{productNo};
+    </select>
 
 </mapper>

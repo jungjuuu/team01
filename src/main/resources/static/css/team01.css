@@ -76,3 +76,20 @@ footer {
             font-size: 1.5ex;
         }
         
+        
+        .like-button {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+	outline: none;
+}
+
+.like-button i {
+	font-size: 24px; /* 하트 크기 */
+	color: #bbb; /* 기본 하트 색상 (회색) */
+}
+
+.like-button i.bi-heart-fill {
+	color: red; /* 좋아요 클릭 시 빨간색 */
+}

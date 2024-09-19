@@ -3,8 +3,27 @@ package com.cream.team01.vo;
 public class LikeVO {
 
 	public int likeNo;
-	public int likeCount;
+	public int productNo;
 	public int memberNo;
+	public int likeProductCount;
+	
+	
+	public LikeVO() {
+		
+	}
+	
+	public LikeVO(int productNo, int memberNo) {
+		this.productNo = productNo;
+		this.memberNo = memberNo;
+	}
+	
+	public int getLikeProductCount() {
+		return likeProductCount;
+	}
+
+	public void setLikeProductCount(int likeProductCount) {
+		this.likeProductCount = likeProductCount;
+	}
 	
 	
 	public int getLikeNo() {
@@ -13,11 +32,11 @@ public class LikeVO {
 	public void setLikeNo(int likeNo) {
 		this.likeNo = likeNo;
 	}
-	public int getLikeCount() {
-		return likeCount;
+	public int getProductNo() {
+		return productNo;
 	}
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 	public int getMemberNo() {
 		return memberNo;
@@ -26,11 +45,10 @@ public class LikeVO {
 		this.memberNo = memberNo;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "LikeVO [likeNo=" + likeNo + ", likeCount=" + likeCount + ", memberNo=" + memberNo + "]";
+		return "LikeVO [likeNo=" + likeNo + ", productNo=" + productNo + ", memberNo=" + memberNo
+				+ ", likeProductCount=" + likeProductCount + "]";
 	}
-	
 	
 }
