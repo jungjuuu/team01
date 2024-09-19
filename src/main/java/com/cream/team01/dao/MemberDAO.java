@@ -49,5 +49,9 @@ public class MemberDAO {
 		return session.selectList("getOrderListByMemberNo", memberNo);
 	}
 	
+	// memberNo로 멤버의 이름을 조회하는 메서드
+    public String getMemberNameByMemberNo(int memberNo) {
+        return session.selectOne("getMemberNameByMemberNo", memberNo);
+    }
 
 }
