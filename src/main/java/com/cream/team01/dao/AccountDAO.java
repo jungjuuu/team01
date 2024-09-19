@@ -10,27 +10,27 @@ import com.cream.team01.vo.MemberVO;
 @Component
 public class AccountDAO {
 
-	@Autowired
-	SqlSession session;
+   @Autowired
+   SqlSession session;
 
-	public AccountVO selectAccount(String accountId) {
-		
-		  return session.selectOne("selectAccount", accountId);
-	}
-	
-	public int getMemberNoByAccountNo(int accountNo) {
+   public AccountVO selectAccount(String accountId) {
+      
+        return session.selectOne("selectAccount", accountId);
+   }
+   
+   public int getMemberNoByAccountNo(int accountNo) {
         return session.selectOne("getMemberNoByAccountNo", accountNo); 
     }
-	
-	public int getSellerNoByAccountNo(int accountNo) {
+   
+   public int getSellerNoByAccountNo(int accountNo) {
         return session.selectOne("getSellerNoByAccountNo", accountNo);  // 셀러 정보 가져오기
     }
 
-	
-	
-	
-	
-	// 비밀번호 재설정
+   
+   
+   
+   
+   // 비밀번호 재설정
     public int updatePassword(String accountId, String accountPassword) {
         AccountVO account = new AccountVO();
         account.setAccountId(accountId); // 아이디 설정

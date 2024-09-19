@@ -27,6 +27,20 @@ public class SellerProductController {
     @Autowired
     private SellerDAO sellerDAO;
 
+	
+	  // sellermypage에 상품 목록 띄우기
+	  
+	  @RequestMapping("/sellermypage") public ModelAndView
+	  sellerMypageList(HttpSession session) { Integer sellerNo = (Integer)
+	  session.getAttribute("sellerNo"); SellerVO seller =
+	  sellerDAO.getSellerByNo(sellerNo); List<ProductVO> products =
+	  productDAO.getProductsBySeller(sellerNo); System.out.println("조회된 상품 목록: " +
+	  products); ModelAndView result = new ModelAndView("sellermypage");
+	  result.addObject("seller", seller); result.addObject("products", products);
+	  
+	  return result; }
+	
+    
     // 판매자의 상품 목록 조회
     @RequestMapping("/list")
     public ModelAndView sellerProductList(HttpSession session) {
@@ -133,4 +147,3 @@ public class SellerProductController {
         return "redirect:/seller/products/list";
     }
 }
-

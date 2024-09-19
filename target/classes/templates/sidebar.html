@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>회원 마이페이지</title>
+
 <link rel="stylesheet" href="/css/team01.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-
- <style>
- @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-        h2 {
-            font-weight: bold;
-        }
-
-        .hr1 {
+    <style>
+     @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+   		.hr1 {
             border: 0;
             height: 2px;
             background: #d3d3d3;
@@ -257,88 +251,34 @@
           padding: 20px;
         }
         
-
-</style>
+    </style>
 </head>
-
 <body>
-    <div th:insert="header :: header"></div>
 
-     <head>
+ <head>
       <meta charset="utf-8">
       <title>Animated Sidebar Menu | CodingLab</title>
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
    </head>
- 
-      <div class="wrapper">
-         <input type="checkbox" id="btn" hidden>
-         <label for="btn" class="menu-btn">
-         <i class="fas fa-bars"></i>
-         <i class="fas fa-times"></i>
-         </label>
-         <nav id="sidebar">
-            <div class="title">
-               Side Menu
-            </div>
+   
+    <div class="wrapper">
+        <input type="checkbox" id="btn" hidden>
+        <label for="btn" class="menu-btn">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </label>
+        <nav id="sidebar">
+            <div class="title">Side Menu</div>
             <ul class="list-items">
-               <li><a th:href="@{/main}"><i class="fas fa-home"></i>Home</a></li>
-               <li><a th:href="@{/sellermypage}"><i class="fas fa-address-book"></i>판매자</a></li>
-               <li><a th:href="@{seller/products/list}"><i class="bi bi-handbag-fill"></i>판매 상품</a></li>
-               <li><a th:href="@{sellerinquirywrite}"><i class="bi bi-patch-question-fill"></i>1:1 문의</a></li>
-      
+                <li><a th:href="@{/main}" id="main" name="main"><i class="fas fa-home"></i>Home</a></li>
+                <li><a th:href="@{/order}" id="membermypage" name="membermypage"><i class="fas fa-address-book"></i>회원 정보</a></li>
+                <li><a th:href="@{/membermypage}" id="membermypage" name="membermypage"></i>구매 상품</a></li>
+                <li><a th:href="@{/likelist}" id="likelist" name="likelist"></i>찜 상품</a></li>
+                <li><a th:href="@{/memberinquirywrite}" id="memberinquirywrite" name="memberinquirywrite"></i>1:1 문의</a></li>
             </ul>
-         </nav>
-      </div>
-  
- 
-
-    <div id="main-content"> <!-- Main Content 추가 -->
-        <h2 style="margin-left: 13ex; margin-top: 2ex;">상품 관리</h2>
-        
-
-        <form style="margin-left: 20ex; margin-top: 3ex;">
-           
-            <span class="right" style="margin-right: 25ex;">
-                <span class="grey" id="strong">SELECT</span>
-                <select name="filter">
-                    <option value="제목">제목</option>
-                    <option value="글쓴이">글쓴이</option>
-                </select>
-                <input type="text">
-                <input type="button" name="검색" class="gradient" value="검색">
-            </span>
-        </form>
-
-      
-         <table border="1" style="margin-bottom:30px;">
-        <thead>
-            <tr>
-                <th>상품 번호</th>
-                <th>상품 이름</th>
-                <th>가격</th>
-                <th>카테고리</th>
-                <th>이미지</th>             
-            </tr>
-        </thead>
-        <tbody>
-           <tr th:each="product : ${products}">
-			    <td th:text="${product.productNo}"></td>
-			    <td th:text="${product.productName}"></td>
-			    <td th:text="${product.productPrice} + ' 원'"></td>
-			    <td th:text="${product.category.categoryName}"></td>
-			    <td><img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" width="100"></td>
-			</tr>
-		</tbody>
-    </table>
-        <br>
-
-        <span class="right" style="margin-right: 25ex;">
-            <input type="button" value="목록" class="greylist">
-            <input type="button" value="글쓰기" class="gradient">
-        </span>
+        </nav>
     </div>
-
-    <div th:insert="footer :: footer"></div>
+    
 </body>
 </html>
