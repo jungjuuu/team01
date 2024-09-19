@@ -48,6 +48,10 @@ public class ProductDAO {
 	    return session.selectList("getNewProducts");
 	}
 	
+    public List<ProductVO> getPopularProducts() {
+        return session.selectList("getPopularProducts");
+    }
+	
 	public List<ProductVO> getProductsByCategorySortedByRecent(int categoryNo) {
 	    return session.selectList("getProductsByCategorySortedByRecent", categoryNo);
 	}

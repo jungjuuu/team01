@@ -119,12 +119,35 @@ body {
 	<main id="container" class="product-item flex-grow-1"
 		style="background-color: white; padding: 50px;">
 		<div style="font-size: 3ex; font-weight: 600;">Most Popular</div>
+    <div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">인기 상품</div>
+    <div id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col" th:each="product : ${popularProducts}">
+            <div class="card h-100">
+            <a th:href="@{'/products/detail/' + ${product.productNo}}"
+							style="text-decoration: none; color: black;">
+                <img th:src="@{'/images/' + ${product.productImage}}" class="card-img-top" alt="상품 이미지">
+                </a>
+                <div class="card-body">
+                <a th:href="@{'/products/detail/' + ${product.productNo}}"
+							style="text-decoration: none; color: black;">
+                    <h5 class="card-title" th:text="${product.productName}">상품명</h5>
+                    <p class="card-text" th:text="${product.productPrice} + ' 원'">가격</p>
+                    </a>
+                    <!-- 좋아요 버튼 -->
+                    <button class="like-button" th:data-product-no="${product.productNo}">
+                        <i class="bi" th:classappend="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
+                    </button>
+                    <span th:text="'Likes: ' + ${product.likesCount}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
 		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">인기
 			상품</div>
 		<div id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
 			<div class="col">
 				<div class="card h-100">
-					<img src="/images/top01.png" class="card-img-top" alt="...">
+					<img src="/images/top01.png" class="card-img-top" alt="..." style="width: 56.5ex;">
 					<div class="card-body">
 						<h5 class="card-title">Card title</h5>
 						<p class="card-text">This is a longer card with supporting
@@ -197,16 +220,26 @@ body {
 		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">신규 등록 상품</div>
 		<div id="cardContainer2" class="row row-cols-1 row-cols-md-5 g-4">
 			<div class="col" th:each="product : ${newProducts}">
-				<a th:href="@{'/products/detail/' + ${product.productNo}}" style="text-decoration: none;">
 					<div class="card h-100">
+				<a th:href="@{'/products/detail/' + ${product.productNo}}" style="text-decoration: none;">
 						<img th:src="@{'/images/' + ${product.productImage}}"
-							class="card-img-top" alt="상품 이미지">
+							class="card-img-top" alt="상품 이미지"></a>
+							class="card-img-top" style="width: 56.5ex;" alt="상품 이미지">
 						<div class="card-body">
+						 <a th:href="@{'/products/detail/' + ${product.productNo}}"
+							style="text-decoration: none; color: black;">
 							<h5 class="card-title" th:text="${product.productName}">상품명</h5>
 							<p class="card-text" th:text="${product.productPrice} + ' 원'">가격</p>
+						</a>
+					<!-- 좋아요 버튼 -->
+					<button class="like-button"
+						th:data-product-no="${product.productNo}">
+						<i class="bi"
+							th:classappend="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
+					</button>
+					<span th:text="'Likes: ' + ${product.likesCount}"></span>
 						</div>
-					</div>
-				</a>
+				</div>
 			</div>
 		</div>
 		<div class="text-center mt-4"
@@ -299,8 +332,49 @@ body {
 			}
 		}
 	});
+	
+	$(document).ready(function () {
+	   
+	    $('.like-button').click(function () {
+	        var productNo = $(this).data('product-no');
+	        var $button = $(this);
 
-	//가을룩
+	        $.ajax({
+	            url: '/like/click',
+	            type: 'POST',
+	            data: { productNo: productNo },
+	            success: function (response) {
+	                if (response === 'added') {
+	                    $button.find('i').removeClass('bi-heart').addClass('bi-heart-fill');
+	                } else if (response === 'removed') {
+	                    $button.find('i').removeClass('bi-heart-fill').addClass('bi-heart');
+	                }
+
+	                
+	                updateLikeCount(productNo, $button);
+	            },
+	            error: function () {
+	                alert('오류발생');
+	            }
+	        });
+	    });
+
+	    
+	    function updateLikeCount(productNo, $button) {
+	        $.ajax({
+	            url: '/like/count',
+	            type: 'POST',
+	            data: { productNo: productNo },
+	            success: function (count) {
+	                $button.siblings('span').text('Likes: ' + count);
+	            },
+	            error: function () {
+	                console.error('오류발생');
+	            }
+	        });
+	    }
+	});
+
 </script>
 
 </html>

@@ -107,6 +107,15 @@
 		SELECT * FROM products
 		ORDER BY product_no DESC
 	</select>
+	
+	<!-- 좋아요순으로 상품 조회 -->
+	<select id="getPopularProducts"
+		resultType="com.cream.team01.vo.ProductVO">
+		SELECT p.*,
+		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
+		FROM products p
+		ORDER BY likes_count DESC
+	</select>
 
 	<!-- 카테고리에서 최신순 정렬 -->
 	<select id="getProductsByCategorySortedByRecent"
@@ -145,6 +154,11 @@
 		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
 		FROM products p
 		WHERE p.category_no = #{categoryNo}
+		(SELECT COUNT(*) FROM likes
+		WHERE product_no = p.product_no) AS likes_count
+		FROM products p
+		WHERE
+		p.category_no = #{categoryNo}
 		ORDER BY likes_count DESC
 	</select>
 

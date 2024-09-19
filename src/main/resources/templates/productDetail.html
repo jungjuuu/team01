@@ -11,25 +11,95 @@
         crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+	a {
+	  text-decoration: none;
+	  color: black;
+	}
+	   
+	.line {
+  position: absolute; 
+  width: 450px; 
+  border-top: 3px solid gray;
+}   
+
+.v-line {
+  border-left : thin solid gray;
+  height : 100%;
+  margin: 0 auto;
+  margin-right: 60ex;
+}
+
+
+          /* Footer 고정 */
+        body {
+            margin: 0;
+            padding-bottom: 60px; 
+            position: relative;
+            min-height: 100vh;
+        }
+
+         footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%; 
+            height: 150px; 
+          	
+          
+        } 
+</style>
 </head>
 <body>
     <div th:insert="header :: header"></div>
 
-    <main id="container" class="product-item flex-grow-1" style="background-color: white; padding: 50px;">
-        <div style="font-size: 3ex; font-weight: 600;" th:text="${product.productName}">상품명</div>
-        <div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">상품 상세 정보</div>
+    <main id="container" class="product-item flex-grow-1" style="background-color: white; padding: 50px; margin-left: 30ex; margin-top: 10ex;">
+        <div style="font-size: 3ex; font-weight: 600; margin-left: 26ex;" th:text="${product.productName}">상품명</div>
+        <div style="margin-bottom: 2ex; font-size: 2ex; margin-left: 40ex; color: gray;">상품 상세 이미지</div>
 
         <div class="row">
-            <div class="col-md-6">
-                <img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" style="width: 100%; height: auto;">
+            <div class="col-md-5">
+                <img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지" style="width: 60%; height: auto; margin-left: 40ex;">
             </div>
-            <div class="col-md-6">
-                <h3 th:text="${product.productName}">상품명</h3>
-                <p th:text="${product.productPrice} + ' 원'">가격</p>
-                
-                <button class="btn btn-danger">찜</button>
-                <button class="btn btn-secondary">장바구니에 추가</button>
-                <a th:href="'/buyproduct/' + ${product.productNo}">결제</a>
+
+            
+            <div class="col-md-1 d-flex justify-content-center align-items-center" >
+                <div class='v-line' style="margin-left: 40ex;"></div>
+            </div>
+
+            <div class="col-md-6" >
+                <h3 th:text="${product.productName}" style="font-weight: 600;">상품명</h3>
+                <p th:text="${product.productPrice} + ' 원'"  style="margin-top: 2ex; font-size: 3ex">가격</p>
+
+                <p style="font-weight: 600; width: 50ex;">
+                    <a class="btn btn-outline-dark" th:href="'/buyproduct/' + ${product.productNo}" style="width: 100%; padding: 12px;">결제</a>
+                </p>
+                <button class="btn btn-danger col-md-2" style="margin-left: 1.5ex;">좋아요<i class="bi bi-heart-fill"></i></button>
+                <button class="btn btn-secondary col-md-2" style="margin-left: 2ex;">장바구니에 추가<i class="bi bi-basket3"></i></button>
+
+                <div>
+                    <p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">추가 혜택</p>
+                    <span style="color: gray; font-weight: 600;">포인트</span>
+                    <span style="margin-left: 2ex;">계좌 간편결제 시 1% 적립</span>	        	
+                </div>	
+
+                <div>
+                    <span style="color: gray; font-weight: 600;">결제</span>
+                    <span style="margin-left: 2ex;">Cream카드 최대 15만원 상당 혜택</span>
+                </div> 
+
+                <div class="line" style="margin-top: 3ex;"></div>
+
+                <div>
+                    <p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">배송 정보</p>
+                    <span style="color: gray; font-weight: 600;">일반배송</span>
+                    <span style="margin-left: 2ex;">무료 이벤트 ( 09.01 ~ 10.01 )</span>	        	
+                </div>	
+
+                <div>
+                    <span style="color: gray; font-weight: 600;">배송 날짜</span>
+                    <span style="margin-left: 2ex;">검수 후 배송 : 5 ~ 7일 내 도착 예정</span>
+                </div> 
+                <div class="line" style="margin-top: 3ex;"></div>
             </div>
         </div>
     </main>
@@ -37,3 +107,4 @@
     <div th:insert="footer :: footer"></div>
 </body>
 </html>
+        
