@@ -28,8 +28,7 @@ public class SellerProductController {
     private SellerDAO sellerDAO;
 
 	
-	  // sellermypage에 상품 목록 띄우기
-	  
+	  // sellermypage에 상품 목록 띄우기  
 	  @RequestMapping("/sellermypage") public ModelAndView
 	  sellerMypageList(HttpSession session) { Integer sellerNo = (Integer)
 	  session.getAttribute("sellerNo"); SellerVO seller =
