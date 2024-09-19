@@ -142,75 +142,6 @@ body {
             </div>
         </div>
     </div>
-		<div style="margin-bottom: 2ex; font-size: 2ex; color: gray;">인기
-			상품</div>
-		<div id="cardContainer" class="row row-cols-1 row-cols-md-5 g-4">
-			<div class="col">
-				<div class="card h-100">
-					<img src="/images/top01.png" class="card-img-top" alt="..." style="width: 56.5ex;">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting
-							text below as a natural lead-in to additional content. This
-							content is a little bit longer.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card h-100">
-					<img src="/images/top02.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a short card.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card h-100">
-					<img src="/images/top03.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting
-							text below as a natural lead-in to additional content.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card h-100">
-					<img src="/images/top04.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting
-							text below as a natural lead-in to additional content. This
-							content is a little bit longer.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="card h-100">
-					<img src="/images/top05.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting
-							text below as a natural lead-in to additional content. This
-							content is a little bit longer.</p>
-					</div>
-				</div>
-			</div>
-			<div id="showcard" class="col">
-				<div class="card h-100">
-					<img src="/images/top06.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a longer card with supporting
-							text below as a natural lead-in to additional content. This
-							content is a little bit longer.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="text-center mt-4"
 			style="text-align: center; margin-top: 20px;">
 			<button id="btn" type="button" class="btn btn-outline-secondary">더보기v</button>
@@ -224,7 +155,6 @@ body {
 				<a th:href="@{'/products/detail/' + ${product.productNo}}" style="text-decoration: none;">
 						<img th:src="@{'/images/' + ${product.productImage}}"
 							class="card-img-top" alt="상품 이미지"></a>
-							class="card-img-top" style="width: 56.5ex;" alt="상품 이미지">
 						<div class="card-body">
 						 <a th:href="@{'/products/detail/' + ${product.productNo}}"
 							style="text-decoration: none; color: black;">
