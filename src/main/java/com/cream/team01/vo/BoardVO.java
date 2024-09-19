@@ -9,7 +9,7 @@ public class BoardVO {
 	public String reviewDate;
 	public int memberNo;
 	public int sellerNo;
-	
+
 	
 	//문의게시판 vo
 	public int inquiryNo;

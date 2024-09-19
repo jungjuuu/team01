@@ -322,6 +322,7 @@
 	</select>
 	
 	
+	<select id="getMemberInquiries" resultType="com.cream.team01.vo.BoardVO">
    	 	SELECT 
 	        inquiry_no, 
 	        inquiry_title, 

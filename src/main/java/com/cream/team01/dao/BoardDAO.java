@@ -19,6 +19,7 @@ public class BoardDAO {
     @Autowired
     SqlSession session;
 
+    
     // 문의하기
     public void creatememberInquriyWrite(BoardVO board) {
         session.insert("addMemberInquiryWrite", board);
