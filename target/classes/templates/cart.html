@@ -43,11 +43,13 @@
 							<div th:each="cart : ${cartItems}">
 
 								<div class="card h-150px mt-1 p-5">
-								<input type="hidden" name="productNo" th:value="${cart.productNo}"> 
+								<input type="hidden" name="productNo" th:value="${cart.productNo}">
 								<input type="hidden" name="productPrice" th:value="${cart.productPrice}">
 								
 									<input type="checkbox" checked="checked"
 										onchange="updateTotals()"
+										name="selectProducts"
+										th:value="${cart.productNo}"
 										th:attr="data-price=${cart.productPrice}"
 										class="cart-checkbox"
 										style="position: absolute; top: 50%; right: 0; margin: 10px;">

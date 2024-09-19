@@ -88,14 +88,11 @@ public class BuyController {
 	}
 
 	@RequestMapping("/addOrderCart")
-	public ModelAndView AddOrderCart(@RequestParam("productNo") List<Integer> productNos,
+	public ModelAndView AddOrderCart(@RequestParam("selectProducts") List<Integer> productNos,
 			@RequestParam("productQuantity") List<Integer> productQuantities,
 			@RequestParam("productPrice") List<Integer> productPrices) {
-
 		
 		int memberNo = (Integer) session.getAttribute("memberNo");
-		
-		
 		
 		for (int i = 0; i < productNos.size(); i++) {
 			
