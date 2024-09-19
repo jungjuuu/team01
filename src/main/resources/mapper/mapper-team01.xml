@@ -107,6 +107,15 @@
 		SELECT * FROM products
 		ORDER BY product_no DESC
 	</select>
+	
+	<!-- 좋아요순으로 상품 조회 -->
+	<select id="getPopularProducts"
+		resultType="com.cream.team01.vo.ProductVO">
+		SELECT p.*,
+		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
+		FROM products p
+		ORDER BY likes_count DESC
+	</select>
 
 	<!-- 카테고리에서 최신순 정렬 -->
 	<select id="getProductsByCategorySortedByRecent"
@@ -142,9 +151,11 @@
 	<select id="getProductsByCategorySortedByLikes"
 		parameterType="int" resultType="com.cream.team01.vo.ProductVO">
 		SELECT p.*,
-		(SELECT COUNT(*) FROM likes WHERE product_no = p.product_no) AS likes_count
+		(SELECT COUNT(*) FROM likes
+		WHERE product_no = p.product_no) AS likes_count
 		FROM products p
-		WHERE p.category_no = #{categoryNo}
+		WHERE
+		p.category_no = #{categoryNo}
 		ORDER BY likes_count DESC
 	</select>
 
@@ -271,7 +282,8 @@
 
 	<!-- 좋아요 추가 -->
 	<insert id="addLike" parameterType="com.cream.team01.vo.LikeVO">
-		INSERT INTO likes (product_no, member_no)
+		INSERT INTO likes
+		(product_no, member_no)
 		VALUES (#{productNo}, #{memberNo})
 	</insert>
 
@@ -280,7 +292,8 @@
 		parameterType="com.cream.team01.vo.LikeVO">
 		DELETE FROM likes
 		WHERE product_no = #{productNo}
-		AND member_no = #{memberNo}
+		AND
+		member_no = #{memberNo}
 	</delete>
 
 	<!-- 좋아요 개수 조회 -->

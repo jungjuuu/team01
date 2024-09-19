@@ -20,12 +20,13 @@ public class MainController {
 	@RequestMapping(value= {"/", "/main"})
 	public ModelAndView main() {
 		List<ProductVO> newProducts = productDAO.getNewProducts();
+		List<ProductVO> popularProducts = productDAO.getPopularProducts();
 		 ModelAndView result = new ModelAndView("main");  
 	        result.addObject("newProducts", newProducts);  
+	        result.addObject("popularProducts", popularProducts);
 	        return result;
 		
 	}
-	
 
 }
 
