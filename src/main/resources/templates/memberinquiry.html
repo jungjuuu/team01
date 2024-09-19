@@ -133,19 +133,12 @@
     </tr>
     <tr th:each="inquiry : ${inquiryList}">
           <td class="center" style="width: 20ex;" th:text="${inquiry.inquiryNo}">1</td>
-        <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryTitle}">문의합니다</td>
+        <td class="left" style="width: 70ex;" th:text="${inquiry.inquiryTitle}">문의합니다</td>
         <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryContent}">문의 내용</td>
         <td class="center" th:text="${inquiry.memberName}">글쓴이</td> 
         <td class="center" th:text="${inquiry.inquiryDate}">2022-05-18</td>
     </tr>
-
-    <tr th:each="inquiryBoardList : ${inquiryBoardList}">
-        <td class="center" style="width: 20ex;" th:text="${inquiryBoardList.inquiryNo}">1</td>
-        <td class="left" style="width: 150ex;" th:text="${inquiryBoard.inquiryTitle}">문의합니다</td>
-        <td class="center"   th:text="${member.memberName}">박정주</td>
-        <td class="center"  th:text="${orderList.orderDate}">일시</td>     
-    </tr>
-   
+    
 </table>
 <br>
 
