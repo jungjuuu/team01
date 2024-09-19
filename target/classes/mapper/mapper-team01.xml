@@ -310,8 +310,15 @@
 	<!-- 문의하기 -->
 	<insert id="addMemberInquiryWrite"
 		parameterType="com.cream.team01.vo.BoardVO">
-		INSERT INTO members (inquiry_title, inquiry_content)
-		VALUES (#{inquiryTitle}, #{inquiryContent});
-	</insert>
+		INSERT INTO inquiry_board (inquiry_title, inquiry_content, member_no, seller_no)
+    	VALUES (
+        #{inquiryTitle},
+        #{inquiryContent},
+        #{memberNo}, 
+        #{sellerNo} )
+	</insert> 
+		
+	
+	
 
 </mapper>
