@@ -362,10 +362,7 @@
         (SELECT seller_no FROM sellers WHERE seller_no = #{sellerNo}));
 	</insert> 
 		
-	    SELECT member_name 
-	    FROM members 
-	    WHERE member_no = #{memberNo}
-	</select>
+	    
 	
 	
 
