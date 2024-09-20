@@ -116,10 +116,10 @@ public class SellerProductController {
             return "redirect:/accountlogin";  
         }
 
-        // 수정하려는 상품이 현재 로그인한 판매자의 것인지 확인
-        if (product.getSellerNo() != sellerNo) {
-            return "redirect:/sellermypage/product/list";  
-        }
+		/*
+		 * // 수정하려는 상품이 현재 로그인한 판매자의 것인지 확인 if (product.getSellerNo() != sellerNo) {
+		 * return "redirect:/sellermypage/product/list"; }
+		 */
 
         productDAO.updateProduct(product);
         return "redirect:/sellermypage/product/list";
