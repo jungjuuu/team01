@@ -11,7 +11,7 @@
         <h1>상품 수정</h1>
 
         <!-- 상품 수정 폼 시작 -->
-        <form th:action="@{'/seller/products/edit/' + ${product.productNo}}" method="post" enctype="multipart/form-data">
+        <form th:action="@{'/sellermypage/product/edit/' + ${product.productNo}}" method="post" enctype="multipart/form-data">
             
             <!-- 상품명 -->
             <div class="mb-3">
@@ -50,7 +50,7 @@
             <button type="submit" class="btn btn-primary">수정하기</button>
 
             <!-- 취소 버튼 -->
-            <a th:href="@{'/seller/products/list'}" class="btn btn-secondary">취소</a>
+            <a th:href="@{'/sellermypage/product/list'}" class="btn btn-secondary">취소</a>
 
         </form>
         <!-- 상품 수정 폼 끝 -->

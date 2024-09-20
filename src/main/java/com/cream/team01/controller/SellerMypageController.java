@@ -23,11 +23,12 @@ public class SellerMypageController {
 	    @Autowired
 	    private SellerDAO sellerDAO;
 	    
-	//123
-	@RequestMapping(value= {"/sellermypage"})
-	public String main() {
-		return "sellermypage";
-	}
+		/*
+		 * //123
+		 * 
+		 * @RequestMapping(value= {"/sellermypage"}) public String main() { return
+		 * "sellermypage"; }
+		 */
 	
     
 	
