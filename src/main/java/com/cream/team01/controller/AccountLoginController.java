@@ -43,6 +43,8 @@ public class AccountLoginController {
                if (account.getAccountLevel() == 1) { 
                    Integer memberNo = accountDAO.getMemberNoByAccountNo(account.getAccountNo());
                    session.setAttribute("memberNo", memberNo);
+                   int accountNo = account.getAccountNo();
+                   session.setAttribute("accountNo", accountNo);
                    return "redirect:/main";
                } else { 
                    Integer sellerNo = accountDAO.getSellerNoByAccountNo(account.getAccountNo());

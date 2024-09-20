@@ -61,4 +61,24 @@ public class MemberDAO {
         return session.selectOne("getMemberNameByMemberNo", memberNo);
     }
 
+
+    // 회원 정보 수정
+	public void editMember(MemberVO mvo) {
+		
+		session.update("editMember", mvo);
+	}
+
+	// 회원 정보 탈퇴
+	public void deleteMember(int memberNo) {
+
+		
+		session.delete("deleteMember", memberNo);
+		
+	}
+	
+	// 계정 탈퇴
+	public void deleteMemberAccount(int accountNo) {
+		
+		session.delete("deleteAccountByMemberNo", accountNo);
+	}
 }
