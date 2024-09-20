@@ -16,12 +16,17 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Integer accountNo = (Integer) session.getAttribute("accountNo");
 
-        
         if (accountNo == null) {
-            response.sendRedirect("/accountlogin");
-            return false; 
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write(
+                "<script>" +
+                "alert('로그인이 필요합니다.');" +
+                "window.location.href='/accountlogin';" +
+                "</script>"
+            );
+            return false;
         }
 
-        return true; 
+        return true;
     }
 }
