@@ -14,31 +14,37 @@ import jakarta.servlet.http.HttpSession;
 
 
 @Controller
-public class MemberInquiryWriteController {
-	
-	@Autowired
-	private BoardDAO boardDAO;
-	
-	@Autowired
-	private HttpSession session;
-	
-	// 문의 폼
+public class MemberReviewWriteController {
+   
+   @Autowired
+   private BoardDAO boardDAO;
+   
+   @Autowired
+   private HttpSession session;
+   
+   // 문의 폼
     @GetMapping("/inquiry/{productNo}")
     public ModelAndView inquiryForm(@PathVariable("productNo") int productNo) {
-        ModelAndView result = new ModelAndView("memberinquirywrite");
+        ModelAndView result = new ModelAndView("memberreviewwrite");
         result.addObject("productNo", productNo); 
         return result;
     }
+    
+    // 문의 폼 생성
+    @GetMapping("/memberreviewwrite")
+    public String memberreviewwriteForm() {
+       return "memberreviewwrite"; 
+    }
 
     // 문의 등록 처리
-	@PostMapping("/addmemberinquirywrite")
-	public String addMemberInquiryWriteForm(BoardVO board, HttpSession session) {
-		Integer memberNo = (Integer) session.getAttribute("memberNo");
-		board.setMemberNo(memberNo);
-		boardDAO.addMemberInquiryWrite(board);
-		return "redirect:/memberinquiry"; 
-	}
-	
+   @PostMapping("/addmemberreviewwrite")
+   public String addMemberInquiryWriteForm(BoardVO board, HttpSession session) {
+      Integer memberNo = (Integer) session.getAttribute("memberNo");
+      board.setMemberNo(memberNo);
+      boardDAO.addMemberInquiryWrite(board);
+      return "redirect:/memberreview"; 
+   }
+   
 
 }
 
