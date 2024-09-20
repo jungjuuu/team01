@@ -105,7 +105,7 @@
 <body>
 <div th:insert="header :: header"></div>
 
-<h2> 문의 게시판 </h2>
+<h2> 리뷰 게시판 </h2>
 
 <hr class="hr1" noshade>
 
@@ -127,16 +127,16 @@
     <tr>
         <th>번호</th>
         <th>제목</th>
-        <th>문의 내용</th>
+        <th>내용</th>
         <th>글쓴이</th>
         <th>일시</th>
     </tr>
     <tr th:each="inquiry : ${inquiryList}">
-          <td class="center" style="width: 20ex;" th:text="${inquiry.inquiryNo}">1</td>
-        <td class="left" style="width: 70ex;" th:text="${inquiry.inquiryTitle}">문의합니다</td>
-        <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryContent}">문의 내용</td>
-        <td class="center" th:text="${inquiry.memberName}">글쓴이</td> 
-        <td class="center" th:text="${inquiry.inquiryDate}">2022-05-18</td>
+          <td class="center" style="width: 20ex;" th:text="${inquiry.inquiryNo}"></td>
+        <td class="left" style="width: 70ex;" th:text="${inquiry.inquiryTitle}"></td>
+        <td class="left" style="width: 150ex;" th:text="${inquiry.inquiryContent}"></td>
+        <td class="center" th:text="${inquiry.memberName}"></td> 
+        <td class="center" th:text="${inquiry.inquiryDate}"></td>
     </tr>
     
 </table>
