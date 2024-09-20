@@ -47,7 +47,7 @@ public class AccountLoginController {
                } else { 
                    Integer sellerNo = accountDAO.getSellerNoByAccountNo(account.getAccountNo());
                    session.setAttribute("sellerNo", sellerNo);
-                   return "redirect:/seller/products/list";
+                   return "redirect:/sellermypage/product/list";
                }
                
                
