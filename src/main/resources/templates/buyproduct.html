@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품 상세 정보</title>
+<link rel="stylesheet" href="/css/team01.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+	<div th:insert="header :: header"></div>
+
+	<div class="d-flex justify-content-center" id="kt_app_main">
+		<div class="d-flex mt-5 col-6">
+			<div class="w-100">
+
+
+				<div class="card card-flush w-100 m-5 p-5">
+
+					<div class="card-body">
+
+
+						<h6 class="m-3">
+							<span class="fs-3 fw-bold">결제 페이지</span>
+						</h6>
+
+						<form action="/addOrder" method="post" onsubmit="return buyAsk();">
+
+							<input type="hidden" name="productNo" th:value="${buyproduct.productNo}">
+							<input type="hidden" name="orderPrice" id="orderPrice">
+								
+
+							<div class="card h-150px mt-1 p-5">
+								<span class="fs-5 fw-bold mb-3">배송 정보</span>
+								<p class="fw-bold text-dark">받는 분
+								<p class="text-secondary" th:text="${member.memberName}"></p>
+								<p class="fw-bold text-dark">연락처
+								<p class="text-secondary" th:text="${member.memberMobile}"></p>
+								<p class="fw-bold text-dark">주소
+								<p class="text-secondary" th:text="${member.memberAddress}"></p>
+
+							</div>
+
+							<div class="card h-150px mt-1 p-5">
+								<span class="fs-5 fw-bold mb-3">상품 정보</span>
+								<p class="fw-bold text-dark">상품명
+								<p class="fw-bold text-secondary"
+									th:text="${buyproduct.productName}"></p>
+								<img class="fw-bold mb-2"
+									th:src="@{'/images/' + ${buyproduct.productImage}}"
+									style="width: 100px; height: 100px;">
+								<p class="fw-bold text-dark">상품 가격</p>
+								<p class="fw-bold text-secondary" id="productPrice"
+									th:text="${buyproduct.productPrice}"></p>
+
+								<p class="">
+									상품 수량 : <input type="number" id="productQuantity"
+										name="productQuantity" style="width: 100px" value="1">
+								</p>
+							</div>
+
+							<div class="card h-150px mt-1 p-5">
+								<span class="fs-5 fw-bold text-secondary mb-3">결제 방법</span> <select
+									style="width: 150px">
+									<option value="">카카오페이</option>
+									<option value="">네이버페이</option>
+									<option value="">신용카드</option>
+									<option value="">계좌이체</option>
+								</select>
+							</div>
+
+							<div class="card h-150px mt-1 p-5">
+								<span class="fs-5 fw-bold text-secondary mb-3">최종 주문 정보</span>
+								<p class="fw-bold">
+									수량 : <span id="totalQuantity"></span>
+								</p>
+								<p class="fw-bold">
+									총 구매 가격 : <span id="totalPrice"></span>
+								</p>
+							</div>
+
+							<div class="d-flex justify-content-center mt-5">
+								<button class="btn btn-outline-dark w-100" type="submit">
+									<i class="bi bi-coin"></i> 구매하기
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<div th:insert="footer :: footer"></div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const productQuantityElem = document
+					.getElementById("productQuantity");
+			const productPriceElem = document.getElementById("productPrice");
+			const totalQuantityElem = document.getElementById("totalQuantity");
+			const totalPriceElem = document.getElementById("totalPrice");
+			const orderPrice = document.getElementById("orderPrice");
+			
+			
+			const productPrice = Number(productPriceElem.textContent.replace(
+					' 원', '').replace(/,/g, '')); // '원'과 쉼표 제거 후 숫자로 변환
+
+			function total() {
+				const totalQuantity = Number(productQuantityElem.value) || 1;
+				const totalPrice = totalQuantity * productPrice;
+				totalQuantityElem.textContent = totalQuantity + " 개";
+				totalPriceElem.textContent = totalPrice + " 원";
+				orderPrice.value = totalPrice;
+			}
+
+			productQuantityElem.addEventListener('input', total);
+
+			total();
+
+		});
+		
+		function buyAsk() {
+		    const productQuantity = document.getElementById("productQuantity").value;
+		    const totalPrice = document.getElementById("orderPrice").value;
+
+		    // 사용자에게 확인 메시지 표시
+		    const ask = confirm(`구매하시겠습니까?\n수량: ${productQuantity}개\n총 가격: ${totalPrice} 원`);
+
+		    // 사용자가 "확인"을 클릭하면 true를 반환하여 폼이 제출됨
+		    return ask;
+		}
+		
+		
+	</script>
+
+</body>
+</html>

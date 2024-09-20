@@ -9,13 +9,33 @@ public class BoardVO {
 	public String reviewDate;
 	public int memberNo;
 	public int sellerNo;
+
 	
 	//문의게시판 vo
 	public int inquiryNo;
 	public String inquiryTitle;
 	public String inquiryContent;
 	public String inquiryDate;
+	private String memberName;
+	private int productNo;
 	
+	
+	
+	public int getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
+	}
+	
+	public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
 	
 	public int getReviewNo() {
 		return reviewNo;
