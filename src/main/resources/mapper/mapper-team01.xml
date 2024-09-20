@@ -332,7 +332,15 @@
 		select * from carts where member_no = #{memberNo};
 	</select>
 
-
+<select id="getCartItems"
+    parameterType="com.cream.team01.vo.MemberVO"
+    resultType="com.cream.team01.vo.CartVO">
+    select * from cart_details cd
+    join products p on
+    cd.product_no = p.product_no join carts c on
+    cd.cart_no = c.cart_no
+    where member_no = #{memberNo};
+</select>
 	
 	
 

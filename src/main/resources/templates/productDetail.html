@@ -94,22 +94,8 @@ footer {
     
 
 	
-                <div>
-                    <p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">추가 혜택</p>
-                    <span style="color: gray; font-weight: 600;">포인트</span>
-                    <span style="margin-left: 2ex;">계좌 간편결제 시 1% 적립</span>	        	
-                </div>	
 			<div style="display: flex; align-items: center;">
-    <button class="like-button btn btn-danger" 
-            style="margin-left: 2ex; height:5ex; display: flex; align-items: center; justify-content: center;"
-            th:data-product-no="${product.productNo}">
-        좋아요 <i class="bi" th:class="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
-    </button>
     
-    <button class="btn btn-secondary col-md-4" style="margin-left: 2ex;"
-            id="addCartBtn" th:data-product-no="${product.productNo}">
-        장바구니에 추가 <i class="bi bi-basket3"></i>
-    </button>
 </div>
 
 
