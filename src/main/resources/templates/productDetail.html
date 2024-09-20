@@ -34,7 +34,7 @@ a {
 /* Footer 고정 */
 body {
 	margin: 0;
-	padding-bottom: 60px;
+	padding-bottom: 130px;
 	position: relative;
 	min-height: 100vh;
 }
@@ -43,7 +43,7 @@ footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	height: 150px;
+	height: 130px;
 }
 </style>
 </head>
@@ -51,17 +51,17 @@ footer {
 	<div th:insert="header :: header"></div>
 
 	<main id="container" class="product-item flex-grow-1"
-		style="background-color: white; padding: 50px; margin-left: 30ex; margin-top: 10ex;">
-		<div style="font-size: 3ex; font-weight: 600; margin-left: 26ex;"
+		style="background-color: white; padding: 50px; margin-left: 25ex; margin-top: 5ex;">
+		<div style="font-size: 3ex; font-weight: 600; margin-left: 16ex;"
 			th:text="${product.productName}">상품명</div>
 		<div
-			style="margin-bottom: 2ex; font-size: 2ex; margin-left: 40ex; color: gray;">상품
+			style="margin-bottom: 2ex; font-size: 2ex; margin-left: 25ex; color: gray;">상품
 			상세 이미지</div>
 
 		<div class="row">
 			<div class="col-md-5">
 				<img th:src="@{'/images/' + ${product.productImage}}" alt="상품 이미지"
-					style="width: 60%; height: auto; margin-left: 40ex;">
+					style="width: 60%; height: auto; margin-left: 26ex;">
 			</div>
 
 
@@ -80,22 +80,19 @@ footer {
 						th:href="'/buyproduct/' + ${product.productNo}"
 						style="width: 100%; padding: 12px;">결제</a>
 				</p>
-				<button class="like-button btn btn-outline-danger"
-					th:data-product-no="${product.productNo}">
-					좋아요 <i class="bi"
-						th:class="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
-				</button>
-				<button class="btn btn-secondary col-md-2" style="margin-left: 2ex;"
-					id="addCartBtn" th:data-product-no="${product.productNo}">
-					장바구니에 추가<i class="bi bi-basket3"></i>
-				</button>
+			<div style="display: flex; align-items: center;">
+    <button class="like-button btn btn-danger" 
+            style="margin-left: 2ex; height:5ex; display: flex; align-items: center; justify-content: center;"
+            th:data-product-no="${product.productNo}">
+        좋아요 <i class="bi" th:class="${product.liked} ? 'bi-heart-fill' : 'bi-heart'"></i>
+    </button>
+    
+    <button class="btn btn-secondary col-md-4" style="margin-left: 2ex;"
+            id="addCartBtn" th:data-product-no="${product.productNo}">
+        장바구니에 추가 <i class="bi bi-basket3"></i>
+    </button>
+</div>
 
-				<div>
-					<p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">추가
-						혜택</p>
-					<span style="color: gray; font-weight: 600;">포인트</span> <span
-						style="margin-left: 2ex;">계좌 간편결제 시 1% 적립</span>
-				</div>
 
 				<div>
 					<p style="margin-top: 5ex; font-weight: 700; font-size: 3ex;">추가
