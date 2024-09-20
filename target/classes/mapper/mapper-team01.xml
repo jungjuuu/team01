@@ -226,9 +226,9 @@
 	<insert id="createAccount"
 		parameterType="com.cream.team01.vo.AccountVO" useGeneratedKeys="true"
 		keyProperty="accountNo">
-		INSERT INTO accounts (account_id, account_password)
+		INSERT INTO accounts (account_id, account_password,account_level)
 		VALUES
-		(#{accountId}, #{accountPassword});
+		(#{accountId}, #{accountPassword}, #{accountLevel});
 	</insert>
 
 	<!-- 멤버 회원가입 -->
