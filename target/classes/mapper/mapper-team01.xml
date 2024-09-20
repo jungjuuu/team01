@@ -311,6 +311,22 @@
 		#{orderNo}, #{productNo})
 	</insert>
 
+
+
+
+
+	<!-- 장바구니 아이템 리스트 불러오기 -->
+	<select id="getCartItems"
+		parameterType="com.cream.team01.vo.MemberVO"
+		resultType="com.cream.team01.vo.CartVO">
+		select * from cart_details cd
+		join products p on
+		cd.product_no = p.product_no join carts c on
+		cd.cart_no = c.cart_no
+		where member_no = #{memberNo};
+	</select>
+
+
 	<!-- 장바구니에 추가 -->
 	<insert id="addCartItem"
 		parameterType="com.cream.team01.vo.CartVO" useGeneratedKeys="true"
@@ -413,5 +429,21 @@
 		FROM products WHERE product_no = #{productNo})
 		);
 	</insert>
+
+	<update id="editMember"
+		parameterType="com.cream.team01.vo.MemberVO">
+		update members set member_name = #{memberName},
+		member_age = #{memberAge},
+		member_mobile = #{memberMobile},
+		member_address = #{memberAddress} where member_no = #{memberNo};
+	</update>
+
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM members WHERE member_no = #{memberNo};
+	</delete>
+
+	<delete id="deleteAccountByMemberNo" parameterType="int">
+		 DELETE FROM accounts WHERE account_no = #{accountNo};
+	</delete>
 
 </mapper>
