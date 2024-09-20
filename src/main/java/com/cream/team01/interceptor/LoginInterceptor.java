@@ -10,17 +10,18 @@ import jakarta.servlet.http.HttpSession;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-   
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-           throws Exception {
-       System.out.println("LoginInterceptor.preHandler()");
-       HttpSession session = request.getSession();
-       String userId = (String) session.getAttribute("userId");
-       if(userId == null || userId.length() == 0) {
-           response.sendRedirect("login_form.do");
-           return false;
-       }
-       return true;
-   }
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        HttpSession session = request.getSession();
+        Integer accountNo = (Integer) session.getAttribute("accountNo");
+
+        
+        if (accountNo == null) {
+            response.sendRedirect("/accountlogin");
+            return false; 
+        }
+
+        return true; 
+    }
 }
